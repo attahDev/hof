@@ -55,45 +55,45 @@ export default function LegacyImpactSection() {
 }
 
 function LegacyIntroduction() {
-  return (
-    <div className="flex flex-col px-6 pb-4 pt-14 sm:px-12 sm:pb-16 sm:pt-16 lg:min-h-[760px] lg:px-14 lg:pb-16 xl:px-16">
-      {/* Everything moves to the bottom together */}
-      <div className="lg:mt-auto">
-        <p className="max-w-[500px] text-[24px] font-normal leading-[1.35] text-[#EFE9E2] sm:text-[27px] lg:text-[30px]">
-          From great
-          <br />
-          ancient kingdoms to
-          <br />
-          modern innovators.
-        </p>
+    return (
+        <div className="flex flex-col px-6 pb-4 pt-14 sm:px-12 sm:pb-16 sm:pt-16 lg:min-h-[760px] lg:px-14 lg:pb-16 xl:px-16">
+            {/* Everything moves to the bottom together */}
+            <div className="lg:mt-auto">
+                <p className="max-w-[500px] text-[24px] font-normal leading-[1.35] text-[#EFE9E2] sm:text-[27px] lg:text-[30px]">
+                    From great
+                    <br />
+                    ancient kingdoms to
+                    <br />
+                    modern innovators.
+                </p>
 
-        <Link
-          href="#legacy"
-          className="mt-8 inline-flex h-12 w-fit items-center gap-3 rounded-lg bg-[#D9B700] px-4 text-base font-medium text-[#000D1C] transition hover:bg-[#E5C300] sm:mt-10 sm:h-14 sm:gap-4 sm:px-5 sm:text-xl lg:mt-14 lg:h-16 lg:text-[25px]">
-          Explore the Legacy
-          <ArrowDown size={20} strokeWidth={1.8} className="sm:hidden" />
-          <ArrowDown size={24} strokeWidth={1.8} className="hidden sm:block" />
-        </Link>
+                <Link
+                    href="#legacy"
+                    className="mt-8 inline-flex h-12 w-fit items-center gap-3 rounded-lg bg-[#D9B700] px-4 text-base font-medium text-[#000D1C] transition hover:bg-[#E5C300] sm:mt-10 sm:h-14 sm:gap-4 sm:px-5 sm:text-xl lg:mt-14 lg:h-16 lg:text-[25px]">
+                    Explore the Legacy
+                    <ArrowDown size={20} strokeWidth={1.8} className="sm:hidden" />
+                    <ArrowDown size={24} strokeWidth={1.8} className="hidden sm:block" />
+                </Link>
 
-        <div className="mt-8 w-fit sm:mt-10 lg:mt-14">
-          <Link
-            href="/dashboard/nominations"
-            className="block font-montserrat text-lg font-normal text-[#DBD2C8] transition hover:text-[#D9B700] sm:text-xl lg:text-[25px]"
-          >
-            Nominate a Changemaker
-          </Link>
+                <div className="mt-8 w-fit sm:mt-10 lg:mt-14">
+                    <Link
+                        href="/dashboard/nominations"
+                        className="block font-montserrat text-lg font-normal text-[#DBD2C8] transition hover:text-[#D9B700] sm:text-xl lg:text-[25px]"
+                    >
+                        Nominate a Changemaker
+                    </Link>
 
-          <div className="relative mt-3 h-2 w-full">
-            <div className="absolute bottom-0 left-1.5 right-1.5 border-b border-[#BFB2A3]" />
+                    <div className="relative mt-3 h-2 w-full">
+                        <div className="absolute bottom-0 left-1.5 right-1.5 border-b border-[#BFB2A3]" />
 
-            <div className="absolute bottom-0 left-0 h-2 w-2 rounded-bl-[8px] border-b border-l border-[#BFB2A3]" />
+                        <div className="absolute bottom-0 left-0 h-2 w-2 rounded-bl-[8px] border-b border-l border-[#BFB2A3]" />
 
-            <div className="absolute bottom-0 right-0 h-2 w-2 rounded-br-[8px] border-b border-r border-[#BFB2A3]" />
-          </div>
+                        <div className="absolute bottom-0 right-0 h-2 w-2 rounded-br-[8px] border-b border-r border-[#BFB2A3]" />
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 }
 
 function LegacyStatsContent() {
@@ -260,18 +260,15 @@ function LegacyCollage() {
                 />
             </div>
 
-            {/* Two bottom images only */}
-
-
-                <div className="relative overflow-hidden">
-                    <Image
-                        src="/home/impact-3.png"
-                        alt="Carol Ann Whitehead portrait"
-                        fill
-                        sizes="(max-width: 768px) 50vw, 320px"
-                        className="object-cover object-top"
-                    />
-                </div>
+            {/* Bottom image */}
+            <div className="relative h-[260px] overflow-hidden sm:h-[320px] lg:h-auto lg:min-h-[360px]">
+                <Image
+                    src="/home/impact-3.png"
+                    alt="Carol Ann Whitehead portrait"
+                    fill
+                    sizes="(max-width: 768px) 50vw, 320px"
+                    className="object-cover object-top"
+                />
             </div>
         </div>
     );
