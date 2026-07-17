@@ -261,16 +261,7 @@ function LegacyCollage() {
             </div>
 
             {/* Two bottom images only */}
-            <div className="grid h-[220px] grid-cols-2 gap-0 sm:h-[280px] lg:h-auto lg:min-h-[370px]">
-                <div className="relative overflow-hidden">
-                    <Image
-                        src="/home/impact-2.png"
-                        alt="Carol Ann Whitehead attending a library event"
-                        fill
-                        sizes="(max-width: 768px) 50vw, 320px"
-                        className="object-cover object-center"
-                    />
-                </div>
+
 
                 <div className="relative overflow-hidden">
                     <Image
