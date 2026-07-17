@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
+import ScrollReveal from "./animations/ScrollReveal";
 
 type Champion = {
   id: string;
@@ -169,7 +170,7 @@ export default function CommunityChampionsArchive() {
 
       <div className="relative z-10 mx-auto w-full max-w-[1440px]">
         {/* Header */}
-        <header className="max-w-[900px]">
+        <ScrollReveal as="header" className="max-w-[900px]">
           <div className="flex items-center gap-3 text-[#D9B700]">
             <span className="font-serif text-[26px] italic leading-none">
               VI.
@@ -189,16 +190,17 @@ export default function CommunityChampionsArchive() {
             technologists, mentors, and youth leaders every graduate, every
             speaker, every innovator shaping the future now.
           </p>
-        </header>
+        </ScrollReveal>
 
         {/* Cards */}
         <div className="mt-16 flex flex-col gap-8">
           {champions.map((champion, index) => (
-            <ChampionCard
-              key={champion.id}
-              champion={champion}
-              imageOnLeft={index % 2 === 0}
-            />
+            <ScrollReveal key={champion.id} delay={Math.min(index * 0.06, 0.3)}>
+              <ChampionCard
+                champion={champion}
+                imageOnLeft={index % 2 === 0}
+              />
+            </ScrollReveal>
           ))}
         </div>
 

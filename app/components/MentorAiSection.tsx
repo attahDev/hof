@@ -2,6 +2,7 @@
 
 import { ArrowRight, Bot, Loader2, Sparkles } from "lucide-react";
 import { FormEvent, useState } from "react";
+import ScrollReveal from "./animations/ScrollReveal";
 
 const API_URL =
   "https://olayimika01-hall-of-fame.hf.space/api/v1/chat";
@@ -130,7 +131,7 @@ export default function MentorAiSection() {
   };
 
   return (
-    <section className="w-full border-y-[0.5px] border-black/10 bg-[#F8F4EA] px-6 py-[70px] sm:px-10 lg:px-[50px]">
+    <ScrollReveal as="section" className="w-full border-y-[0.5px] border-black/10 bg-[#F8F4EA] px-6 py-[70px] sm:px-10 lg:px-[50px]">
       <div className="mx-auto w-full max-w-[1440px]">
         <div className="flex min-h-[500px] flex-col rounded-lg border border-[#BFB2A3] bg-[#D9B7000D] px-6 py-8 sm:px-8 lg:px-[45px] lg:py-[45px]">
           {/* Header */}
@@ -288,6 +289,6 @@ export default function MentorAiSection() {
           </div>
         </div>
       </div>
-    </section>
+    </ScrollReveal>
   );
 }

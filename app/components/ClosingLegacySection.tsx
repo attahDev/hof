@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowUp, MapPin } from "lucide-react";
+import ScrollReveal from "./animations/ScrollReveal";
 
 export default function ClosingLegacySection() {
   return (
-    <section className="w-full border-y-[0.5px] border-black/10 bg-[#F8F4EA] px-6 py-[70px] sm:px-10 lg:px-[50px]">
+    <ScrollReveal as="section" className="w-full border-y-[0.5px] border-black/10 bg-[#F8F4EA] px-6 py-[70px] sm:px-10 lg:px-[50px]">
       <div className="mx-auto w-full max-w-[1440px]">
         {/* Top closing content */}
         <div className="mx-auto flex max-w-[900px] flex-col items-center text-center">
@@ -21,7 +22,7 @@ export default function ClosingLegacySection() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-8">
             <Link
               href="#legacy"
-              className="inline-flex h-[56px] items-center gap-3 rounded-lg bg-[#D7263D] px-6 text-[18px] font-semibold text-white transition hover:bg-[#BE1F35]"
+              className="btn-shimmer inline-flex h-[56px] items-center gap-3 rounded-lg bg-[#D7263D] px-6 text-[18px] font-semibold text-white transition hover:bg-[#BE1F35]"
             >
               Explore the Legacy
               <ArrowUp size={18} strokeWidth={2} />
@@ -115,6 +116,6 @@ export default function ClosingLegacySection() {
           </div>
         </div>
       </div>
-    </section>
+    </ScrollReveal>
   );
 }

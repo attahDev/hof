@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useMemo, useState } from "react";
+import ScrollReveal from "./animations/ScrollReveal";
 
 type RegionId =
   | "all"
@@ -76,7 +77,7 @@ export default function GlobalModernEraSection() {
   }, [activeRegion]);
 
   return (
-    <section className="w-full border-y-[0.5px] border-black/10 bg-[#F8F4EA] py-[70px]">
+    <ScrollReveal as="section" className="w-full border-y-[0.5px] border-black/10 bg-[#F8F4EA] py-[70px]">
       <div className="mx-auto w-full max-w-[1440px] px-6 sm:px-10 lg:px-[50px]">
         {/* Heading */}
         <header className="max-w-[860px]">
@@ -139,7 +140,7 @@ export default function GlobalModernEraSection() {
           </div>
         )}
       </div>
-    </section>
+    </ScrollReveal>
   );
 }
 

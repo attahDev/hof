@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ScrollReveal from "./animations/ScrollReveal";
 
 type LiteraryFigure = {
   id: string;
@@ -45,7 +46,7 @@ const literaryFigures: LiteraryFigure[] = [
 
 export default function IntellectualTraditionsSection() {
   return (
-    <section className="w-full bg-[#F5EBE1] py-12 sm:py-16 lg:py-[72px]">
+    <ScrollReveal as="section" className="w-full bg-[#F5EBE1] py-12 sm:py-16 lg:py-[72px]">
       <div className="mx-auto w-full max-w-[1500px] px-4 sm:px-10 lg:px-12">
         <header>
           <div className="flex items-center gap-3 text-[#A54350] sm:gap-4">
@@ -74,7 +75,7 @@ export default function IntellectualTraditionsSection() {
           ))}
         </div>
       </div>
-    </section>
+    </ScrollReveal>
   );
 }
 

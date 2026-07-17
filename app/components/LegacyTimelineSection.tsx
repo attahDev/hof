@@ -1,7 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import ScrollReveal from "./animations/ScrollReveal";
 
 type TimelineEntry = {
   id: string;
@@ -61,7 +63,7 @@ const timelineEntries: TimelineEntry[] = [
     category: "Civil Rights Pioneer",
     description:
       "Journalist, activist and organiser whose work shaped Black British political and cultural history.",
-    image: "/community/claudia.jpg",
+    image: "/home/timeline/claudia-jones.png",
     imagePosition: "object-top",
   },
   {
@@ -71,21 +73,39 @@ const timelineEntries: TimelineEntry[] = [
     category: "Technology & Leadership",
     description:
       "A new generation advancing technology, education, entrepreneurship and social impact.",
-    image: "/community/How Does Technology Influence Unique Art.jpeg",
+    image: "/home/timeline/modern-innovators.png",
     imagePosition: "object-top",
   },
 ];
 
 export default function LegacyTimelineSection() {
   const timelineRef = useRef<HTMLDivElement | null>(null);
-
+  const [scrollProgress, setScrollProgress] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [dragStartX, setDragStartX] = useState(0);
   const [initialScrollLeft, setInitialScrollLeft] = useState(0);
 
+  useEffect(() => {
+    const container = timelineRef.current;
+    if (!container) return;
+
+    const onScroll = () => {
+      const maxScroll = container.scrollWidth - container.clientWidth;
+      setScrollProgress(maxScroll > 0 ? container.scrollLeft / maxScroll : 0);
+    };
+
+    onScroll();
+    container.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+
+    return () => {
+      container.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+
   const beginDrag = (clientX: number) => {
     const container = timelineRef.current;
-
     if (!container) return;
 
     setIsDragging(true);
@@ -95,11 +115,9 @@ export default function LegacyTimelineSection() {
 
   const continueDrag = (clientX: number) => {
     const container = timelineRef.current;
-
     if (!container || !isDragging) return;
 
     const distance = clientX - dragStartX;
-
     container.scrollLeft = initialScrollLeft - distance;
   };
 
@@ -108,7 +126,7 @@ export default function LegacyTimelineSection() {
   };
 
   return (
-    <section className="w-full overflow-hidden bg-[#F5EBE1] py-12 sm:py-16 lg:py-24">
+    <ScrollReveal as="section" className="w-full overflow-hidden bg-[#F5EBE1] py-12 sm:py-16 lg:py-24">
       <div className="mx-auto w-full max-w-[1500px]">
         <header className="px-5 sm:px-10 lg:px-12">
           <div className="flex items-center gap-3 text-[#A23D49] sm:gap-5">
@@ -151,8 +169,13 @@ export default function LegacyTimelineSection() {
           ].join(" ")}
         >
           <div className="relative min-w-max px-5 sm:px-10 lg:px-12">
-            {/* Continuous horizontal line */}
-            <div className="absolute left-5 right-5 top-[20px] h-px bg-[#A23D49] sm:left-10 sm:right-10 sm:top-[22px] lg:left-12 lg:right-12" />
+            <div className="absolute left-5 right-5 top-[20px] h-px bg-[#A23D49]/25 sm:left-10 sm:right-10 sm:top-[22px] lg:left-12 lg:right-12" />
+            <div
+              className="absolute left-5 top-[20px] h-[2px] origin-left bg-gradient-to-r from-[#A23D49] via-[#D9B700] to-[#D7263D] transition-[width] duration-150 sm:left-10 sm:top-[21px] lg:left-12"
+              style={{
+                width: `calc((100% - 2.5rem) * ${scrollProgress})`,
+              }}
+            />
 
             <div className="relative flex gap-10 pr-20 sm:gap-[70px] sm:pr-[120px] lg:gap-[95px]">
               {timelineEntries.map((entry) => (
@@ -168,14 +191,19 @@ export default function LegacyTimelineSection() {
           </p>
         </div>
       </div>
-    </section>
+    </ScrollReveal>
   );
 }
 
 function TimelineItem({ entry }: { entry: TimelineEntry }) {
   return (
-    <article className="relative w-[210px] shrink-0 sm:w-[252px] lg:w-[270px]">
-      {/* Timeline marker */}
+    <motion.article
+      className="relative w-[210px] shrink-0 sm:w-[252px] lg:w-[270px]"
+      whileHover={{
+        scale: 1.03,
+        transition: { duration: 0.25, ease: "easeOut" },
+      }}
+    >
       <div className="relative z-10 ml-4 flex h-9 w-9 items-center justify-center rounded-full border-[3px] border-[#A23D49] bg-[#F5EBE1] sm:ml-5 sm:h-11 sm:w-11 lg:h-12 lg:w-12">
         <span className="h-2 w-2 rounded-full bg-transparent" />
       </div>
@@ -184,7 +212,7 @@ function TimelineItem({ entry }: { entry: TimelineEntry }) {
         {entry.century}
       </p>
 
-      <div className="mt-6 overflow-hidden rounded-[8px] border border-white/10 bg-[linear-gradient(205.51deg,#282610_4.55%,#111419_38.62%)] sm:mt-8">
+      <div className="mt-6 overflow-hidden rounded-[8px] border border-white/10 bg-[linear-gradient(205.51deg,#282610_4.55%,#111419_38.62%)] transition-shadow duration-300 hover:border-[#D9B700]/40 hover:shadow-[0_0_24px_rgba(215,38,61,0.18)] sm:mt-8">
         <div className="relative h-[160px] w-full overflow-hidden sm:h-[198px] lg:h-[205px]">
           <Image
             src={entry.image}
@@ -215,6 +243,6 @@ function TimelineItem({ entry }: { entry: TimelineEntry }) {
           </p>
         </div>
       </div>
-    </article>
+    </motion.article>
   );
 }

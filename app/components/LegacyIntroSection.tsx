@@ -1,8 +1,9 @@
 import Image from "next/image";
+import ScrollReveal from "./animations/ScrollReveal";
 
 export default function LegacyIntroSection() {
   return (
-    <section className="relative mx-auto w-full overflow-hidden bg-[#000512] pb-16 sm:pb-20 lg:h-[1000px] lg:pb-0">
+    <ScrollReveal as="section" className="relative mx-auto w-full overflow-hidden bg-[#000512] pb-16 sm:pb-20 lg:h-[1000px] lg:pb-0">
       {/* Narrow text container */}
       <div className="relative z-20 mx-auto flex w-full max-w-[820px] flex-col items-center px-5 pt-14 text-center sm:px-6 sm:pt-16 lg:mb-20 lg:pt-[72px]">
         <h2 className="font-montserrat text-[clamp(32px,9vw,72px)] font-medium uppercase leading-tight text-[#DBD2C8] sm:leading-none lg:text-[clamp(48px,4.5vw,72px)]">
@@ -37,6 +38,6 @@ export default function LegacyIntroSection() {
         {/* Soft blend above the portraits */}
         <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-[#000512] via-[#000512]/70 to-transparent sm:h-28" />
       </div>
-    </section>
+    </ScrollReveal>
   );
 }

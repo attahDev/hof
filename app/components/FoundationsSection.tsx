@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ScrollReveal from "./animations/ScrollReveal";
 
 type FoundationFigure = {
   name: string;
@@ -47,7 +48,7 @@ const foundations: FoundationFigure[] = [
 
 export default function FoundationsSection() {
   return (
-    <section className="w-full bg-[#F5EBE1] py-12 sm:py-16 lg:py-20">
+    <ScrollReveal as="section" className="w-full bg-[#F5EBE1] py-12 sm:py-16 lg:py-20">
       <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-12">
         {/* Heading */}
 
@@ -79,7 +80,7 @@ export default function FoundationsSection() {
           ))}
         </div>
       </div>
-    </section>
+    </ScrollReveal>
   );
 }
 
