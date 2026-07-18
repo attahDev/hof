@@ -4,6 +4,7 @@ import ScrollReveal from "./animations/ScrollReveal";
 type FoundationFigure = {
   name: string;
   years: string;
+  tagline: string;
   description: string;
   image: string;
 };
@@ -12,6 +13,7 @@ const foundations: FoundationFigure[] = [
   {
     name: "John Blanke",
     years: "C. 1511",
+    tagline: "Music. Court. Presence.",
     description:
       "Court musician in the Tudor household. One of the earliest recorded Black individuals in Britain.",
     image: "/home/John.png",
@@ -19,6 +21,7 @@ const foundations: FoundationFigure[] = [
   {
     name: "Mansa Musa",
     years: "14TH CENTURY",
+    tagline: "Wealth. Scholarship. Empire.",
     description:
       "Emperor of Mali, symbol of African wealth, scholarship and global trade networks.",
     image: "/home/mansa.png",
@@ -26,6 +29,7 @@ const foundations: FoundationFigure[] = [
   {
     name: "Queen Nzinga",
     years: "17TH CENTURY",
+    tagline: "Strategy. Resistance. Statecraft.",
     description:
       "Queen of Ndongo and Matamba who resisted Portuguese expansion and defended African sovereignty.",
     image: "/home/queen.png",
@@ -33,6 +37,7 @@ const foundations: FoundationFigure[] = [
   {
     name: "Yaa Asantewaa",
     years: "1840–1921",
+    tagline: "Courage. Leadership. Legacy.",
     description:
       "Leader of the Ashanti resistance whose courage inspired generations across Africa.",
     image: "/home/sanwata.png",
@@ -40,6 +45,7 @@ const foundations: FoundationFigure[] = [
   {
     name: "Toussaint Louverture",
     years: "1743–1803",
+    tagline: "Revolution reshaped the world.",
     description:
       "Leader of the Haitian Revolution whose leadership transformed global history.",
     image: "/home/lover.png",
@@ -50,8 +56,6 @@ export default function FoundationsSection() {
   return (
     <ScrollReveal as="section" className="w-full bg-[#F5EBE1] py-12 sm:py-16 lg:py-20">
       <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-12">
-        {/* Heading */}
-
         <div className="flex items-center gap-3 sm:gap-4">
           <span className="font-serif text-[22px] italic text-[#A54350] sm:text-[26px] lg:text-[30px]">
             II.
@@ -72,8 +76,6 @@ export default function FoundationsSection() {
           has always existed at the centre of history.
         </p>
 
-        {/* Cards */}
-
         <div className="mt-10 grid grid-cols-1 gap-5 xs:grid-cols-2 sm:mt-16 sm:gap-7 md:grid-cols-3 xl:grid-cols-5">
           {foundations.map((person) => (
             <FoundationCard key={person.name} {...person} />
@@ -87,11 +89,21 @@ export default function FoundationsSection() {
 function FoundationCard({
   name,
   years,
+  tagline,
   description,
   image,
 }: FoundationFigure) {
   return (
-    <article className="overflow-hidden rounded-[8px] border border-white/10 bg-[linear-gradient(205deg,#2A261D_0%,#111419_42%)]">
+    <article
+      className="
+        group relative overflow-hidden rounded-[8px]
+        border border-transparent
+        bg-[linear-gradient(205deg,#2A261D_0%,#111419_42%)]
+        transition-[border-color,box-shadow] duration-300
+        hover:border-[#D7263D]
+        hover:shadow-[0_0_0_1px_#D7263D,0_0_18px_rgba(215,38,61,0.55),inset_0_1px_0_rgba(255,80,80,0.35)]
+      "
+    >
       <div className="relative h-[200px] overflow-hidden sm:h-[220px] lg:h-[245px]">
         <Image
           src={image}
@@ -111,7 +123,18 @@ function FoundationCard({
           {years}
         </p>
 
-        <p className="mt-5 text-[13px] leading-[1.7] text-[#E8E3DE] sm:mt-8">
+        <p
+          className="
+            mt-0 max-h-0 overflow-hidden font-montserrat text-[13px] italic
+            leading-snug text-[#D9B700] opacity-0 transition-all duration-300
+            group-hover:mt-3 group-hover:max-h-12 group-hover:opacity-100
+            sm:text-[14px]
+          "
+        >
+          {tagline}
+        </p>
+
+        <p className="mt-5 text-[13px] leading-[1.7] text-[#E8E3DE] transition-[margin] duration-300 group-hover:mt-4 sm:mt-8 sm:group-hover:mt-5">
           {description}
         </p>
       </div>
