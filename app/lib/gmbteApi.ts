@@ -6,7 +6,7 @@
  * for every call this app makes for the rest of the session.
  */
 
-const API_BASE = "https://gmbtebac.onrender.com";
+const API_BASE = process.env.NEXT_PUBLIC_GMBTE_API_BASE || "https://backgmb.onrender.com";
 
 let cachedToken: string | null = null;
 
