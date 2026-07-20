@@ -221,7 +221,7 @@ export default function HallOfFameLayout({
             {/* Header / Logo */}
             <div className="flex h-[112px] shrink-0 items-center justify-between border-b border-[#FFFFFF1A] px-6">
                 <div className="flex items-center gap-4">
-                    <Link href="/" className="relative h-[64px] w-[64px] shrink-0 overflow-hidden rounded-full">
+                    <div className="relative h-[64px] w-[64px] shrink-0 overflow-hidden rounded-full">
                         <Image
                             src="/logo/hlogo.svg"
                             alt="Black Tech Expo Logo"
@@ -229,7 +229,7 @@ export default function HallOfFameLayout({
                             className="object-cover"
                             priority
                         />
-                    </Link>
+                    </div>
                     <h1 className="text-[18px] font-semibold leading-[1.15] text-[#DBD2C8]">
                         <span className="text-[#B1A393]">Black Tech Expo</span><br />
                         Hall of Fame
