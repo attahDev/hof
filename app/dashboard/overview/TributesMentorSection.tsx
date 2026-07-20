@@ -89,7 +89,7 @@ function RecentTributes() {
         </h2>
 
         <Link
-          href="/hall-of-fame/tributes"
+          href="/dashboard/tributes"
           className="text-[12px] sm:text-[14px] font-medium uppercase text-[#B1A393] transition hover:text-white"
         >
           View All

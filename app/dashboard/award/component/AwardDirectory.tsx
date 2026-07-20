@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { ChevronDown, ChevronRight, Search } from "lucide-react";
 import { useMemo, useState } from "react";
 
@@ -372,9 +373,12 @@ function AwardRow({ award, isFirst }: { award: Award; isFirst: boolean }) {
 
       {/* Action Button */}
       <div className="pt-2 lg:pt-0">
-        <button className="h-[38px] sm:h-[42px] lg:h-[46px] w-full lg:ml-auto lg:max-w-[100px] rounded-lg bg-[#D7263D] text-xs sm:text-sm lg:text-base font-bold text-white transition hover:bg-[#D7263D]/90 active:scale-[0.98]">
+        <Link
+          href="/dashboard/community"
+          className="flex h-[38px] sm:h-[42px] lg:h-[46px] w-full lg:ml-auto lg:max-w-[100px] items-center justify-center rounded-lg bg-[#D7263D] text-xs sm:text-sm lg:text-base font-bold text-white transition hover:bg-[#D7263D]/90 active:scale-[0.98]"
+        >
           View
-        </button>
+        </Link>
       </div>
     </div>
   );

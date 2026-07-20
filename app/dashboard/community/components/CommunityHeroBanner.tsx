@@ -49,7 +49,7 @@ export default function CommunityHeroBanner() {
 
         {/* Link Button */}
         <Link
-          href="/dashboard/community/nominations"
+          href="/dashboard/nominations"
           className="flex h-10 mb-3 sm:h-11 w-fit items-center gap-3 sm:gap-4 rounded-lg bg-[#D9B700] px-4 sm:px-5 text-sm sm:text-base font-semibold text-[#000D1C] transition hover:bg-[#D9B700]/90"
         >
           Nominate a Changemaker

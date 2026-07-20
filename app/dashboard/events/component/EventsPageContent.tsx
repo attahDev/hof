@@ -30,7 +30,7 @@ const featuredEvent = {
   time: "10am - 2pm",
   location: "47 Lloyd St, Manchester M2 5LE",
   image: "/event/event-hero.png",
-  href: "/dashboard/events/power-of-expression",
+  href: "/dashboard/events",
 };
 
 const upcomingEvents: EventItem[] = [
@@ -43,7 +43,7 @@ const upcomingEvents: EventItem[] = [
     time: "10 AM\n- 2 PM",
     category: "Regional",
     image: "/event/ev-1.png",
-    href: "/dashboard/events/regional-recognition",
+    href: "/dashboard/events",
   },
   {
     id: "community-champions",
@@ -54,7 +54,7 @@ const upcomingEvents: EventItem[] = [
     time: "10 AM\n- 2 PM",
     category: "Community",
     image: "/event/ev-2.png",
-    href: "/dashboard/events/community-champions",
+    href: "/dashboard/events",
   },
   {
     id: "cybersecurity-training",
@@ -65,7 +65,7 @@ const upcomingEvents: EventItem[] = [
     time: "7 PM\n- 8 PM",
     category: "Regional",
     image: "/event/ev-3.png",
-    href: "/dashboard/events/cybersecurity-training",
+    href: "/dashboard/events",
   },
 ];
 

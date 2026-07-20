@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { ChevronDown, ChevronRight, Globe2, MapPin, Search } from "lucide-react";
 import { useMemo, useState } from "react";
 
@@ -343,9 +344,12 @@ function RegionalPersonCard({ person }: { person: Person }) {
                     </div>
                 </div>
 
-                <button className="mt-5 h-10 sm:h-[42px] w-full sm:w-[116px] rounded-lg bg-[#D7263DE5] text-xs sm:text-sm font-semibold text-white transition hover:bg-[#D7263D]">
+                <Link
+                    href="/dashboard/inductees"
+                    className="mt-5 flex h-10 sm:h-[42px] w-full sm:w-[116px] items-center justify-center rounded-lg bg-[#D7263DE5] text-xs sm:text-sm font-semibold text-white transition hover:bg-[#D7263D]"
+                >
                     View Profile
-                </button>
+                </Link>
             </div>
         </article>
     );

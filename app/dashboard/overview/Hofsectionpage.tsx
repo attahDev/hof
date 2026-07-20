@@ -21,7 +21,7 @@ const categoryCards: CategoryCard[] = [
     description:
       "Honoring lifetime legacy and extraordinary contributions that changed the world",
     image: "/hero/first.png",
-    href: "/hall-of-fame/inductees",
+    href: "/dashboard/inductees",
   },
   {
     id: "regional",
@@ -35,7 +35,7 @@ const categoryCards: CategoryCard[] = [
     subtitle: "Outstanding Individuals",
     description: "Celebrating excellence across regions and communities",
     image: "/hero/secound.png",
-    href: "/hall-of-fame/regional",
+    href: "/dashboard/regional",
     hasGradient: true,
   },
   {
@@ -51,7 +51,7 @@ const categoryCards: CategoryCard[] = [
     description:
       "The heart of our communities. Recognizing those creating real impact every day.",
     image: "/hero/third.png",
-    href: "/hall-of-fame/community",
+    href: "/dashboard/community",
   },
   {
     id: "award",
@@ -66,7 +66,7 @@ const categoryCards: CategoryCard[] = [
     description:
       "Recognizing excellence across industries, innovation and leadership",
     image: "/hero/forth.png",
-    href: "/hall-of-fame/award",
+    href: "/dashboard/award",
   },
 ];
 

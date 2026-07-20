@@ -64,7 +64,7 @@ function LegacyIntroduction() {
                 </p>
 
                 <Link
-                    href="#legacy"
+                    href="/dashboard"
                     className="mt-8 inline-flex h-12 w-fit items-center gap-3 rounded-lg bg-[#D9B700] px-4 text-base font-medium text-[#000D1C] transition hover:bg-[#E5C300] sm:mt-10 sm:h-14 sm:gap-4 sm:px-5 sm:text-xl lg:mt-14 lg:h-16 lg:text-[25px]"
                 >
                     Explore the Legacy

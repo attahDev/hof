@@ -21,7 +21,7 @@ export default function ClosingLegacySection() {
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-8">
             <Link
-              href="#legacy"
+              href="/#legacy"
               className="btn-shimmer inline-flex h-[56px] items-center gap-3 rounded-lg bg-[#D7263D] px-6 text-[18px] font-semibold text-white transition hover:bg-[#BE1F35]"
             >
               Explore the Legacy
@@ -106,7 +106,7 @@ export default function ClosingLegacySection() {
             {/* Register button */}
             <div className="mt-7 flex justify-center">
               <Link
-                href="/events"
+                href="/dashboard/events"
                 className="inline-flex h-[48px] items-center gap-3 rounded-lg bg-[#D7263D] px-6 text-[15px] font-semibold text-white transition hover:bg-[#BE1F35]"
               >
                 Register Interest

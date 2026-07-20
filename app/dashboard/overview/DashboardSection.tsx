@@ -79,25 +79,25 @@ const quickActions = [
     title: "Nominate",
     text: "Submit a candidate",
     icon: Send,
-    href: "/hall-of-fame/nominations",
+    href: "/dashboard/nominations",
   },
   {
     title: "Legacy Tributes",
     text: "Celebrate someone",
     icon: Volume2,
-    href: "/hall-of-fame/tributes",
+    href: "/dashboard/tributes",
   },
   {
     title: "Witness",
     text: "Sign an induction",
     icon: Eye,
-    href: "/hall-of-fame/witness",
+    href: "/dashboard/archive",
   },
   {
     title: "Legacy Story",
     text: "Read or submit",
     icon: BookOpen,
-    href: "/hall-of-fame/library",
+    href: "/dashboard/tributes",
   },
 ];
 
@@ -150,7 +150,7 @@ function HallOfFamePanel() {
         </h2>
 
         <Link
-          href="/hall-of-fame/inductees"
+          href="/dashboard/inductees"
           className="text-[12px] sm:text-[14px] font-medium uppercase text-[#B1A393] transition hover:text-white"
         >
           View All
