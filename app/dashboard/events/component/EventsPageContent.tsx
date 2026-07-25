@@ -8,7 +8,8 @@ import {
   CheckCircle2,
   MapPin,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { fetchUpcomingEvents, type GmbteEvent } from "../../../lib/gmbteApi";
 
 type EventCategory = "Regional" | "Community";
 
@@ -24,7 +25,7 @@ type EventItem = {
   href: string;
 };
 
-const featuredEvent = {
+const fallbackFeaturedEvent = {
   title: "Power of Expression 2026",
   date: "17 July, 2026",
   time: "10am - 2pm",
@@ -33,7 +34,9 @@ const featuredEvent = {
   href: "/dashboard/events",
 };
 
-const upcomingEvents: EventItem[] = [
+// Used only if the live /events call fails or returns nothing yet — keeps
+// the page from rendering empty while that's sorted out.
+const fallbackUpcomingEvents: EventItem[] = [
   {
     id: "regional-recognition",
     title: "Regional Recognition Ceremony",
@@ -69,9 +72,73 @@ const upcomingEvents: EventItem[] = [
   },
 ];
 
+const FALLBACK_CARD_IMAGES = ["/event/ev-1.png", "/event/ev-2.png", "/event/ev-3.png"];
+
+function mapEventToItem(event: GmbteEvent, index: number): EventItem {
+  const starts = new Date(event.startsAt);
+  const ends = event.endsAt ? new Date(event.endsAt) : null;
+  const timeRange = ends
+    ? `${starts.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}\n- ${ends.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}`
+    : starts.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+
+  return {
+    id: event.id,
+    title: event.title,
+    location: event.location || "Location TBA",
+    day: starts.toLocaleDateString([], { day: "2-digit" }),
+    month: starts.toLocaleDateString([], { month: "short" }),
+    time: timeRange,
+    // The backend has no "Regional"/"Community" category field — GMBTE-admin
+    // events don't carry that distinction the way the old design mock did,
+    // so this falls back to the event's own tags/mode instead of inventing one.
+    category: (event.tags[0] as EventCategory) || (event.mode as EventCategory) || "Community",
+    image: event.imageUrl || FALLBACK_CARD_IMAGES[index % FALLBACK_CARD_IMAGES.length],
+    href: "/dashboard/events",
+  };
+}
+
 export default function EventsPageContent() {
   const [registered, setRegistered] =
     useState(false);
+  const [events, setEvents] = useState<GmbteEvent[] | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetchUpcomingEvents()
+      .then((res) => {
+        if (cancelled) return;
+        const list = Array.isArray(res) ? res : res.data;
+        setEvents(list);
+      })
+      .catch(() => {
+        if (!cancelled) setEvents([]);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const upcomingEvents = useMemo(() => {
+    if (!events || events.length === 0) return fallbackUpcomingEvents;
+    return events.map(mapEventToItem);
+  }, [events]);
+
+  const featuredEvent = useMemo(() => {
+    if (!events || events.length === 0) return fallbackFeaturedEvent;
+    const lead = events.find((e) => e.isFeatured) ?? events[0];
+    const starts = new Date(lead.startsAt);
+    const ends = lead.endsAt ? new Date(lead.endsAt) : null;
+    return {
+      title: lead.title,
+      date: starts.toLocaleDateString([], { day: "numeric", month: "long", year: "numeric" }),
+      time: ends
+        ? `${starts.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })} - ${ends.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}`
+        : starts.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }),
+      location: lead.location || "Location TBA",
+      image: lead.imageUrl || fallbackFeaturedEvent.image,
+      href: "/dashboard/events",
+    };
+  }, [events]);
 
   return (
     <main className="min-h-screen w-full bg-[#F5EBE1] px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-10 2xl:px-10">
@@ -96,13 +163,14 @@ export default function EventsPageContent() {
 
         <section className="mt-8 grid w-full grid-cols-1 gap-5 lg:mt-12 xl:mt-16 xl:grid-cols-[minmax(0,1fr)_minmax(360px,439px)] xl:gap-4">
           <FeaturedEvent
+            event={featuredEvent}
             registered={registered}
             onRegister={() =>
               setRegistered(true)
             }
           />
 
-          <UpcomingEvents />
+          <UpcomingEvents events={upcomingEvents} />
         </section>
       </div>
     </main>
@@ -114,9 +182,11 @@ export default function EventsPageContent() {
 ========================================================= */
 
 function FeaturedEvent({
+  event: featuredEvent,
   registered,
   onRegister,
 }: {
+  event: typeof fallbackFeaturedEvent;
   registered: boolean;
   onRegister: () => void;
 }) {
@@ -223,7 +293,7 @@ function FeaturedEvent({
    UPCOMING EVENTS
 ========================================================= */
 
-function UpcomingEvents() {
+function UpcomingEvents({ events: upcomingEvents }: { events: EventItem[] }) {
   return (
     <aside className="h-fit overflow-hidden rounded-[15px] border border-white/10 bg-[linear-gradient(204.72deg,#4D3218_4.33%,#111419_52.74%)] p-4 sm:p-5 xl:min-h-[623px]">
       {/* Header */}

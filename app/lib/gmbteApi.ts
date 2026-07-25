@@ -77,3 +77,30 @@ export function fetchApprovedNominations(): Promise<{ data: ApprovedNomination[]
 export function submitNomination(input: { nomineeName: string; category?: string; story: string }) {
   return gmbteFetch("/nominations", { method: "POST", body: JSON.stringify(input) });
 }
+
+// ───────────────────────── Events ─────────────────────────
+// GET /events and GET /events/past are public on gmbtebac (no JWT
+// required), unlike tributes/nominations — so these work even when hof is
+// opened standalone, not just embedded via gmbtefro with a gmbte_token.
+
+export type GmbteEvent = {
+  id: string;
+  title: string;
+  description: string | null;
+  location: string | null;
+  imageUrl: string | null;
+  mode: string | null;
+  link: string | null;
+  startsAt: string;
+  endsAt: string | null;
+  isFeatured: boolean;
+  tags: string[];
+};
+
+export function fetchUpcomingEvents(): Promise<{ data: GmbteEvent[] } | GmbteEvent[]> {
+  return gmbteFetch("/events?audience=HALL_OF_FAME");
+}
+
+export function fetchPastEvents(): Promise<{ data: GmbteEvent[] } | GmbteEvent[]> {
+  return gmbteFetch("/events/past?audience=HALL_OF_FAME");
+}
