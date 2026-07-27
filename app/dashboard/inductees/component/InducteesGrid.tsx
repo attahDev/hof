@@ -23,6 +23,7 @@ type Inductee = {
 const filters: Filter[] = [
     { label: "All Inductees", value: "all" },
     { label: "UK & Manchester", value: "uk-manchester" },
+    { label: "Europe", value: "europe" },
     { label: "Africa", value: "africa" },
     { label: "American & Caribbean", value: "american-caribbean" },
     { label: "Global", value: "global" },
@@ -62,7 +63,7 @@ const inductees: Inductee[] = [
         title: "FIRST BLACK COUNCILLOR\nIN GREATER MANCHESTER",
         years: "1874 – 1940",
         image: "/hero/Button (4).png",
-        filters: ["uk-manchester", "public-service", "all"],
+        filters: ["uk-manchester", "public-service",  "europe", "all"],
     },
     {
         id: "len-johnson",
@@ -70,7 +71,7 @@ const inductees: Inductee[] = [
         title: "BOXING CHAMPION &\nANTI-RACISM CAMPAISM",
         years: "1902 – 1974",
         image: "/hero/Button (11).png",
-        filters: ["uk-manchester", "activist", "all"],
+        filters: ["uk-manchester", "activist", "europe", "all"],
     },
     {
         id: "kwame-nkrumah",
@@ -86,7 +87,7 @@ const inductees: Inductee[] = [
         title: "CAMPAIGNER FOR JUSTICE,\nEQUALITY, AND SOCIAL CHANGE.",
         years: "1952 – Present",
         image: "/hero/Button (7).png",
-        filters: ["uk-manchester", "activist", "all"],
+        filters: ["uk-manchester", "activist", "europe", "all"],
     },
     {
         id: "claudia-jones",
