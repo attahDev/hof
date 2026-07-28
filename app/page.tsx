@@ -1,5 +1,6 @@
 import StoryExperience from "./components/story/StoryExperience";
 import HallOfFameHero from "./components/HallOfFameHero";
+import SectionDivider from "./components/SectionDivider";
 import LegacyIntroSection from "./components/LegacyIntroSection";
 import LegacyImpactSection from "./components/LegacyImpactSection";
 import LegacyTimelineSection from "./components/LegacyTimelineSection";
@@ -17,10 +18,14 @@ export default function Home() {
     <StoryExperience>
       <HallOfFameHero />
 
+      <SectionDivider tone="dark" />
+
       <div id="prologue">
         <LegacyIntroSection />
         <LegacyImpactSection />
       </div>
+
+      <SectionDivider tone="light" />
 
       <div id="legacy-timeline">
         <LegacyTimelineSection />
@@ -30,15 +35,21 @@ export default function Home() {
         <FoundationsSection />
       </div>
 
+      <SectionDivider tone="light" />
+
       <div id="intellectual-traditions">
         <IntellectualTraditionsSection />
       </div>
 
       <AchebeQuoteSection />
 
+      <SectionDivider tone="dark" />
+
       <div id="manchester-influence">
         <ManchesterInfluenceSection />
       </div>
+
+      <SectionDivider tone="light" />
 
       <div id="global-modern-era">
         <GlobalModernEraSection />
@@ -46,9 +57,13 @@ export default function Home() {
 
       <MentorAiSection />
 
+      <SectionDivider tone="dark" />
+
       <div id="community-champions">
         <CommunityChampionsArchive />
       </div>
+
+      <SectionDivider tone="light" />
 
       <div id="epilogue">
         <ClosingLegacySection />

@@ -85,7 +85,7 @@ function LiteraryFigureCard({
   figure: LiteraryFigure;
 }) {
   return (
-    <article className="overflow-hidden rounded-[8px] border border-white/10 bg-[linear-gradient(205.51deg,#282610_4.55%,#111419_38.62%)]">
+    <article className="plaque-card overflow-hidden rounded-[8px] bg-[linear-gradient(205.51deg,#282610_4.55%,#111419_38.62%)]">
       <div className="relative h-[200px] w-full overflow-hidden sm:h-[220px] lg:h-[245px]">
         <Image
           src={figure.image}

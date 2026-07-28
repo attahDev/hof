@@ -68,3 +68,60 @@ body {
     animation: none;
   }
 }
+
+/* ---- Prestige / archive design system --------------------------- */
+
+/* A thin gold rule with a diamond at centre — used between chapters */
+.ornament-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+
+.ornament-divider::before,
+.ornament-divider::after {
+  content: "";
+  height: 1px;
+  flex: 1 1 auto;
+  max-width: 220px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(217, 183, 0, 0.55) 50%,
+    transparent 100%
+  );
+}
+
+.ornament-diamond {
+  width: 7px;
+  height: 7px;
+  transform: rotate(45deg);
+  background: #d9b700;
+  box-shadow: 0 0 10px rgba(217, 183, 0, 0.65);
+  flex: none;
+}
+
+/* Consistent "museum plaque" hover treatment for figure/archive cards */
+.plaque-card {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition:
+    border-color 300ms ease,
+    box-shadow 300ms ease,
+    transform 300ms ease;
+}
+
+.plaque-card:hover {
+  border-color: rgba(217, 183, 0, 0.45);
+  box-shadow:
+    0 0 0 1px rgba(217, 183, 0, 0.25),
+    0 18px 30px -12px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 214, 122, 0.12);
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plaque-card:hover {
+    transform: none;
+  }
+}
