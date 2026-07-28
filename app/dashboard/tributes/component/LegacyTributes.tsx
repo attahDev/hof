@@ -9,9 +9,11 @@ import {
 } from "lucide-react";
 import {
   FormEvent,
+  useEffect,
   useMemo,
   useState,
 } from "react";
+import { fetchTributes, postTribute, type Tribute as ApiTribute } from "../../../lib/gmbteApi";
 
 /* =========================================================
    TYPES
@@ -46,7 +48,7 @@ type FormErrors = Partial<
    and replace the local tribute creation with your API.
 ========================================================= */
 
-const TRIBUTES_ARE_LIVE = false;
+const TRIBUTES_ARE_LIVE = true;
 
 const TRIBUTE_DRAFT_STORAGE_KEY =
   "hall-of-fame-tribute-draft";
@@ -55,69 +57,11 @@ const TRIBUTE_DRAFT_STORAGE_KEY =
    INITIAL TRIBUTES
 ========================================================= */
 
-const initialTributes: Tribute[] = [
-  {
-    id: "tribute-1",
-    author: "Adisa Johnson",
-    recipient: "Amber Wilson",
-    message:
-      "Amber's mentorship programme has changed so many lives across the Caribbean.",
-    createdAt: "2 hours ago",
-    avatar: "/tribuites/tri-1.png",
-  },
-  {
-    id: "tribute-2",
-    author: "Kwame Mensah",
-    recipient: "Prof. Erinma Bell",
-    message:
-      "A lifetime of service, innovation, and inspiration.",
-    createdAt: "Yesterday",
-    avatar: "/tribuites/tri-2.png",
-  },
-  {
-    id: "tribute-3",
-    author: "Jordan Williams",
-    recipient: "Kofi Owusu",
-    message:
-      "Kofi's work in Ghana is exactly what regional recognition was built for.",
-    createdAt: "2 days ago",
-    avatar: "/tribuites/tri-3.png",
-  },
-
-  /*
-   * Extra sample tributes.
-   *
-   * These make VIEW ALL functional for now.
-   * You can replace them with your real backend data later.
-   */
-  {
-    id: "tribute-4",
-    author: "Sarah Thompson",
-    recipient: "Wayne Bennett",
-    message:
-      "Wayne continues to open doors and create meaningful opportunities for people across Greater Manchester.",
-    createdAt: "3 days ago",
-    avatar: "/tribuites/tri-1.png",
-  },
-  {
-    id: "tribute-5",
-    author: "David Mensah",
-    recipient: "Esther Aluko",
-    message:
-      "Your commitment to mentoring others and helping people discover their potential is truly inspiring.",
-    createdAt: "4 days ago",
-    avatar: "/tribuites/tri-2.png",
-  },
-  {
-    id: "tribute-6",
-    author: "Grace Williams",
-    recipient: "Carol Ann Whitehead",
-    message:
-      "Thank you for a lifetime of leadership, service and positive impact within our community.",
-    createdAt: "5 days ago",
-    avatar: "/tribuites/tri-3.png",
-  },
-];
+/* =========================================================
+   RECENT TRIBUTES now fetched live from gmbtebac
+   (GET /tributes) in the effect inside the component below,
+   instead of this demo array.
+========================================================= */
 
 const initialForm: TributeForm = {
   fullName: "",
@@ -136,7 +80,35 @@ export default function LegacyTributes() {
     useState<TributeForm>(initialForm);
 
   const [tributes, setTributes] =
-    useState<Tribute[]>(initialTributes);
+    useState<Tribute[]>([]);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetchTributes()
+      .then((res) => {
+        if (cancelled) return;
+        const list: ApiTribute[] = Array.isArray(res) ? res : res.data;
+        setTributes(
+          list.map((t) => ({
+            id: t.id,
+            author: `${t.user.firstname} ${t.user.lastname}`.trim(),
+            // Real shoutouts are one free-text message, not addressed to a
+            // specific recipient the way the old demo data assumed — the
+            // heading below reads "{author} shouted out" with this blank.
+            recipient: "",
+            message: t.message,
+            createdAt: new Date(t.createdAt).toLocaleString(),
+            avatar: "/tribuites/tri-1.png",
+          })),
+        );
+      })
+      .catch(() => {
+        if (!cancelled) setTributes([]);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const [showAll, setShowAll] =
     useState(false);
@@ -237,33 +209,33 @@ export default function LegacyTributes() {
 
     setSubmittedData(cleanSubmission);
 
-    /* =====================================================
-       LIVE MODE
-
-       Replace this with your API call when the backend
-       is available.
-    ===================================================== */
-
     if (TRIBUTES_ARE_LIVE) {
-      const newTribute: Tribute = {
-        id: crypto.randomUUID(),
-        author: "You",
-        recipient:
-          cleanSubmission.fullName,
-        message:
-          cleanSubmission.message,
-        createdAt: "Just now",
-        avatar: "/profile-avatar.png",
-      };
+      const outgoingMessage = cleanSubmission.fullName
+        ? `${cleanSubmission.message} — in honor of ${cleanSubmission.fullName}`
+        : cleanSubmission.message;
 
-      setTributes((current) => [
-        newTribute,
-        ...current,
-      ]);
+      postTribute(outgoingMessage)
+        .then((created: ApiTribute) => {
+          setTributes((current) => [
+            {
+              id: created.id,
+              author: `${created.user.firstname} ${created.user.lastname}`.trim(),
+              recipient: "",
+              message: created.message,
+              createdAt: "Just now",
+              avatar: "/profile-avatar.png",
+            },
+            ...current,
+          ]);
+        })
+        .catch((error) => {
+          console.error("Unable to post shoutout:", error);
+        });
     }
 
     /* =====================================================
-       COMING SOON MODE
+       COMING SOON MODE — kept for the day someone flips
+       TRIBUTES_ARE_LIVE back off (e.g. during maintenance).
 
        Store privately in this browser.
 

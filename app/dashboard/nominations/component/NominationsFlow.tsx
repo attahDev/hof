@@ -14,7 +14,8 @@ import {
   Sparkles,
   Star,
 } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { fetchApprovedNominations, submitNomination, type ApprovedNomination } from "../../../lib/gmbteApi";
 
 /* =========================================================
    CONFIGURATION
@@ -33,6 +34,7 @@ const TOTAL_STEPS = 9;
 
 type NominationStatus =
   | "All"
+  | "Approved"
   | "Submitted"
   | "Under Review"
   | "Shortlisted"
@@ -138,53 +140,11 @@ const categoryFees: Record<string, string> = {
 };
 
 /* =========================================================
-   DEMO RECENT NOMINATIONS
+   RECENT NOMINATIONS now fetched live from gmbtebac
+   (GET /nominations — approved only) inside the
+   RecentNominations component below, instead of this demo
+   array.
 ========================================================= */
-
-const recentNominations = [
-  {
-    name: "Chiamaka Osei",
-    desc: "Technology & Innovation · Hall of Fame",
-    score: "Score pending",
-    status: "Submitted",
-    avatar: "/normination/sub-1.png",
-  },
-  {
-    name: "Fatima Al-Hassan",
-    desc: "Technology & Innovation · Hall of Fame",
-    score: "Score 81/100",
-    status: "Under Review",
-    avatar: "/normination/sub-2.png",
-  },
-  {
-    name: "Yemi Adeyinka",
-    desc: "Public Service · Regional Recognition",
-    score: "Score 64/100",
-    status: "Under Review",
-    avatar: "/normination/sub-3.png",
-  },
-  {
-    name: "Amina Yusuf",
-    desc: "Youth Leadership · Community Impact & Champion",
-    score: "Score 73/100",
-    status: "Under Review",
-    avatar: "/normination/sub-4.png",
-  },
-  {
-    name: "Dr. Ngozi Eze",
-    desc: "Education · Regional Recognition",
-    score: "Score 88/100",
-    status: "Approved",
-    avatar: "/normination/sub-5.png",
-  },
-  {
-    name: "Tunde Bakare",
-    desc: "Entrepreneurship · Award",
-    score: "Score 41/100",
-    status: "Rejected",
-    avatar: "/normination/sub-6.png",
-  },
-];
 
 /* =========================================================
    MAIN COMPONENT
@@ -252,9 +212,31 @@ export default function NominationsFlow() {
      NEXT STEP
   ======================================================= */
 
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+
   const nextStep = () => {
     if (step === TOTAL_STEPS) {
-      setSubmitted(true);
+      setSubmitting(true);
+      setSubmitError(null);
+      // Only the nomination content is sent — nomineeName/category/story.
+      // The card fields collected in this flow (cardNumber/expiry/cvc)
+      // are NOT sent anywhere: there is no payment processor wired into
+      // this app (no Stripe or similar SDK anywhere in this file). Don't
+      // flip NOMINATIONS_ARE_LIVE to true until real payment processing
+      // exists — right now that would show real users a "Pay & Submit"
+      // button that collects card details and silently does nothing with
+      // them, which is worse than the current honest "Preview" labelling.
+      submitNomination({
+        nomineeName: form.fullName,
+        category: form.category,
+        story: [form.story, form.problem, form.measurableImpact]
+          .filter(Boolean)
+          .join("\n\n"),
+      })
+        .then(() => setSubmitted(true))
+        .catch(() => setSubmitError("Couldn't submit your nomination right now. Please try again."))
+        .finally(() => setSubmitting(false));
       return;
     }
 
@@ -544,6 +526,8 @@ export default function NominationsFlow() {
                   step={step}
                   onBack={prevStep}
                   onNext={nextStep}
+                  submitting={submitting}
+                  submitError={submitError}
                 />
               </div>
             )}
@@ -2023,16 +2007,25 @@ function FooterButtons({
   step,
   onBack,
   onNext,
+  submitting,
+  submitError,
 }: {
   step: number;
   onBack: () => void;
   onNext: () => void;
+  submitting?: boolean;
+  submitError?: string | null;
 }) {
   const isFinalStep =
     step === TOTAL_STEPS;
 
   return (
     <>
+      {submitError && (
+        <p className="mt-4 text-[13px] font-semibold text-[#D7263D]">
+          {submitError}
+        </p>
+      )}
       <div
         className="
           mt-6
@@ -2077,6 +2070,7 @@ function FooterButtons({
         <button
           type="button"
           onClick={onNext}
+          disabled={isFinalStep && submitting}
           className={[
             `
               flex
@@ -2089,6 +2083,7 @@ function FooterButtons({
               text-[14px]
               font-bold
               transition
+              disabled:opacity-60
             `,
 
             !NOMINATIONS_ARE_LIVE &&
@@ -2097,11 +2092,13 @@ function FooterButtons({
               : "bg-[#D7263D] text-white hover:bg-[#BE1F35]",
           ].join(" ")}
         >
-          {!isFinalStep
-            ? "Continue"
-            : NOMINATIONS_ARE_LIVE
-              ? "Pay & Submit Nomination"
-              : "Complete Preview"}
+          {isFinalStep && submitting
+            ? "Submitting..."
+            : !isFinalStep
+              ? "Continue"
+              : NOMINATIONS_ARE_LIVE
+                ? "Pay & Submit Nomination"
+                : "Complete Preview"}
 
           <ArrowRight
             size={16}
@@ -2135,22 +2132,44 @@ function RecentNominations({
       "Panel Review",
     ];
 
-  const filtered = useMemo(
-    () => {
-      if (
-        activeTab === "All"
-      ) {
-        return recentNominations;
-      }
+  const [nominations, setNominations] = useState<ApprovedNomination[] | null>(null);
 
-      return recentNominations.filter(
-        (item) =>
-          item.status ===
-          activeTab,
-      );
-    },
-    [activeTab],
-  );
+  useEffect(() => {
+    let cancelled = false;
+    fetchApprovedNominations()
+      .then((res) => {
+        if (cancelled) return;
+        const list = Array.isArray(res) ? res : res.data;
+        setNominations(list);
+      })
+      .catch(() => {
+        if (!cancelled) setNominations([]);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  // Every nomination this endpoint returns has already been through admin
+  // review (GET /nominations only ever returns status=APPROVED — that's
+  // enforced server-side, not a client filter). The old Submitted/Under
+  // Review/Shortlisted/Panel Review pipeline stages don't exist in the
+  // current schema, so those tabs currently show nothing — a stage-by-stage
+  // review pipeline is a separate feature from "admin approves before it's
+  // public", which is what actually shipped.
+  const filtered = useMemo(() => {
+    if (!nominations) return [];
+    if (activeTab !== "All" && activeTab !== "Approved") return [];
+    return nominations.map((n) => ({
+      name: n.nomineeName,
+      desc: n.category ? `${n.category} · Hall of Fame` : "Hall of Fame",
+      score: "Approved by admin",
+      status: "Approved" as const,
+      // No photo-upload step in the nomination form yet (flagged under
+      // media management) — generic placeholder instead of a broken image.
+      avatar: "/normination/sub-1.png",
+    }));
+  }, [nominations, activeTab]);
 
   return (
     <aside
