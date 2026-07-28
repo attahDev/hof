@@ -176,7 +176,7 @@ const champions: Champion[] = [
   },
   {
     id: "leone-shaw-brown-global",
-    name: "Leone Shaw-Brown",
+    name: "Veronica Owusu",
     award: "GMBTE AFRICA4U GLOBAL CHANGE MAKER AWARD",
     description:
       "Recognized for creating transformative impact and driving positive change on a global scale through leadership, innovation, and vision.",
