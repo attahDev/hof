@@ -109,12 +109,12 @@ export default function MentorAiSection() {
         setAnswer(text);
       }
     } catch (err) {
-      console.error("Mentor AI error:", err);
+      console.error("Pelumi error:", err);
 
       setError(
         err instanceof Error
           ? err.message
-          : "Mentor AI is currently unavailable. Please try again."
+          : "Pelumi is currently unavailable. Please try again."
       );
     } finally {
       setIsLoading(false);
@@ -157,9 +157,14 @@ export default function MentorAiSection() {
             </div>
 
             <div>
-              <h2 className="font-montserrat text-[26px] font-medium uppercase tracking-[0.01em] leading-tight text-white sm:text-[30px]">
-                Mentor AI
-              </h2>
+              <div className="flex items-center gap-2.5">
+                <h2 className="font-montserrat text-[26px] font-medium uppercase tracking-[0.01em] leading-tight text-white sm:text-[30px]">
+                  Pelumi
+                </h2>
+                <span className="rounded-full border border-[#D9B700]/40 px-2.5 py-1 font-montserrat text-[10px] font-semibold uppercase tracking-[0.1em] text-[#D9B700]">
+                  AI Guide
+                </span>
+              </div>
 
               <p className="mt-1 text-[15px] leading-tight text-[#BFB2A3] sm:text-[17px]">
                 Your guide through the archive
@@ -248,7 +253,7 @@ export default function MentorAiSection() {
                 />
 
                 <p className="text-[14px]">
-                  Mentor AI is searching the Hall of Fame archive...
+                  Pelumi is searching the Hall of Fame archive...
                 </p>
               </div>
             )}
@@ -256,7 +261,7 @@ export default function MentorAiSection() {
             {!isLoading && error && (
               <div className="rounded-[4px] border border-[#D7263D]/30 bg-[#D7263D]/10 px-5 py-4">
                 <p className="text-[14px] font-medium text-[#F0A0A9]">
-                  Mentor AI could not answer this question.
+                  Pelumi could not answer this question.
                 </p>
 
                 <p className="mt-1 text-[13px] text-[#BFB2A3]">
@@ -274,7 +279,7 @@ export default function MentorAiSection() {
                   />
 
                   <p className="text-[13px] font-semibold uppercase tracking-[0.08em] text-[#D9B700]">
-                    Mentor AI
+                    Pelumi
                   </p>
                 </div>
 

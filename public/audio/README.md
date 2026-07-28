@@ -1,13 +1,20 @@
-hall-of-fame-narration.mp3 exists and works — it's a functional placeholder,
-not a final voice. It's generated with a local, offline speech synthesizer
-(espeak-ng), pitched down slightly for gravitas. It's clear and correctly
-wired end-to-end (loops, respects the mute toggle, plays on "Enter with
-sound"), but it sounds synthetic/robotic — not "AI narrator" quality.
+hall-of-fame-narration.mp3 — upgraded
 
-narration-script.txt has the exact words, timed for ~60–70s at a slow,
-documentary pace, plus notes on tone and pacing.
+This is now a real neural TTS voice (Piper, "Ryan-high"), not a robotic
+espeak placeholder — noticeably more natural, closer to an actual narrator.
 
-To upgrade: generate the same script with a real AI voice (ElevenLabs,
-PlayHT, Descript Overdub, etc.) or record a voice artist, then overwrite
-this file with the same name. No code changes needed — the player just
-picks up whatever's here.
+IMPORTANT — LICENSE CAVEAT BEFORE THIS GOES LIVE ON A COMMERCIAL SITE:
+The Ryan voice model is trained on a dataset released under
+CC BY-NC-SA 4.0 (non-commercial). GMBTE is a commercial platform, so
+this file should be treated as a placeholder for review/demo purposes,
+not shipped to production as-is. Before launch, either:
+  1. Re-record the same script (narration-script.txt) with a properly
+     licensed commercial TTS service (ElevenLabs, PlayHT, Amazon Polly,
+     Azure/Google Cloud TTS) or a voice artist, or
+  2. Confirm you have appropriate rights/license for this specific
+     voice model for commercial use.
+
+Either way, just overwrite this file with the same filename — no code
+changes needed, the player picks up whatever's here.
+
+narration-script.txt has the exact words + pacing notes.
