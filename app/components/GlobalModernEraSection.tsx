@@ -101,12 +101,8 @@ export default function GlobalModernEraSection() {
           </p>
         </header>
 
-        {/* Region filters */}
-        <div className="mt-10 flex flex-wrap items-center gap-3 border-y border-black/10 py-5">
-          <span className="mr-1 shrink-0 font-serif text-[13px] italic text-[#96701C]">
-            Filter by
-          </span>
-
+        {/* Functional filters */}
+        <div className="mt-8 flex flex-wrap gap-4">
           {filters.map((filter) => {
             const isActive = activeRegion === filter.id;
 
@@ -116,10 +112,10 @@ export default function GlobalModernEraSection() {
                 type="button"
                 onClick={() => setActiveRegion(filter.id)}
                 className={[
-                  "h-[42px] rounded-full border px-6 text-[14px] font-medium uppercase tracking-[0.03em] transition",
+                  "h-[52px] rounded-lg border px-7 text-[17px] font-semibold transition",
                   isActive
-                    ? "border-[#D9B700] bg-[#15110E] text-[#D9B700]"
-                    : "border-black/15 bg-transparent text-[#5B5B58] hover:border-[#D9B700]/60 hover:text-[#96701C]",
+                    ? "border-[#D9B700] bg-[#D9B700] text-[#000D1C]"
+                    : "border-[#C8C1B8] bg-transparent text-[#555D68] hover:border-[#D9B700] hover:text-[#96701C]",
                 ].join(" ")}
               >
                 {filter.label}
@@ -150,7 +146,7 @@ export default function GlobalModernEraSection() {
 
 function GlobalFigureCard({ figure }: { figure: GlobalFigure }) {
   return (
-    <article className="plaque-card mx-auto flex h-[393px] w-full max-w-[248px] flex-col overflow-hidden rounded-lg bg-[linear-gradient(205.51deg,#281C10_4.55%,#111419_38.62%)] pb-[25px]">
+    <article className="mx-auto flex h-[393px] w-full max-w-[248px] flex-col overflow-hidden rounded-lg border border-white/10 bg-[linear-gradient(205.51deg,#281C10_4.55%,#111419_38.62%)] pb-[25px]">
       {/* Image */}
       <div className="relative h-[220px] w-full shrink-0 overflow-hidden">
         <Image
