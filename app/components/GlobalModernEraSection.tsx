@@ -64,7 +64,7 @@ const figures: GlobalFigure[] = [
     years: "Active",
     description:
       "Seven time World Champion and advocate for diversity in global sport.",
-    image: "/home/profile/Gemini_Generated_Image_q20gjqq20gjqq20g.jfif",
+    image: "/home/profile/lewis.png",
     region: "uk",
   },
 ];
