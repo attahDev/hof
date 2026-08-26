@@ -65,7 +65,7 @@ const figures: GlobalFigure[] = [
     description:
       "Seven time World Champion and advocate for diversity in global sport.",
     image: "/home/profile/hamiltion.png",
-    region: "uk", "europe"
+    region: "uk", "europe",
   },
 ];
 
