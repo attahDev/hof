@@ -8,6 +8,7 @@ type RegionId =
   | "all"
   | "uk"
   | "africa"
+  | "europe"
   | "american-caribbean"
   | "europe"
   | "global";
@@ -24,6 +25,7 @@ type GlobalFigure = {
 const filters: { id: RegionId; label: string }[] = [
   { id: "all", label: "All Region" },
   { id: "uk", label: "UK & Manchester" },
+  { id: "europe", label: "Europe" },
   { id: "africa", label: "Africa" },
   { id: "american-caribbean", label: "American & Caribbean" },
   { id: "global", label: "Global" },
@@ -64,7 +66,7 @@ const figures: GlobalFigure[] = [
     years: "Active",
     description:
       "Seven time World Champion and advocate for diversity in global sport.",
-    image: "/home/profile/hamiltion.jfif",
+    image: "/home/profile/lewis-removebg-preview.png",
     region: "uk",
   },
 ];
