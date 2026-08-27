@@ -7,8 +7,44 @@
   font-style: normal;
 }
 
-body {
+@font-face {
   font-family: "Montserrat";
+  src: url("/fonts/Montserrat/Montserrat-Italic-VariableFont_wght.ttf")
+    format("truetype");
+  font-style: italic;
+}
+
+/* ---- Design tokens ------------------------------------------------
+   Single source of truth for the palette. Everything below was
+   previously re-typed as raw hex per component (#D9B700, #96701C,
+   #8A6425 for "gold" alone) which drifted out of sync. New work
+   should reference these vars; existing components are being
+   migrated section by section. */
+:root {
+  --ink: #000d1c;
+  --ink-soft: #3a4249;
+  --paper: #f5ebe1;
+  --paper-deep: #f8f4ea;
+  --midnight: #000512;
+  --gold: #d9b700;
+  --gold-deep: #96701c;
+  --gold-dim: #8a6425;
+  --crimson: #d7263d;
+  --crimson-deep: #be1f35;
+
+  --font-display: "Fraunces", "Georgia", serif;
+  --font-body: "Montserrat", system-ui, sans-serif;
+
+  --ease-prestige: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@theme inline {
+  --font-serif: var(--font-display);
+  --font-montserrat: var(--font-body);
+}
+
+body {
+  font-family: var(--font-body);
 }
 
 @keyframes spin-border {
@@ -124,4 +160,51 @@ body {
   .plaque-card:hover {
     transform: none;
   }
+}
+
+/* ---- Chapter break treatment (replaces the old WebGL shapes) ----- */
+
+/* A soft, static radiance behind the chapter copy. Cheap on mobile,
+   no GPU/canvas cost, and reads as "engraved plaque" rather than
+   "tech demo". */
+.chapter-glow-dark {
+  background-image:
+    radial-gradient(60% 55% at 50% 38%, rgba(217, 183, 0, 0.14) 0%, transparent 72%),
+    radial-gradient(90% 70% at 50% 100%, rgba(215, 38, 61, 0.08) 0%, transparent 70%);
+}
+
+.chapter-glow-light {
+  background-image:
+    radial-gradient(60% 55% at 50% 38%, rgba(150, 112, 28, 0.1) 0%, transparent 72%),
+    radial-gradient(90% 70% at 50% 100%, rgba(0, 13, 28, 0.05) 0%, transparent 70%);
+}
+
+/* Fine engraved rule-lines framing a chapter numeral — subtle, static,
+   reads at any viewport without relying on canvas or motion. */
+.chapter-frame {
+  position: relative;
+}
+
+.chapter-frame::before,
+.chapter-frame::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 1px;
+  height: 56px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(217, 183, 0, 0.4),
+    transparent
+  );
+}
+
+.chapter-frame::before {
+  top: -76px;
+}
+
+.chapter-frame::after {
+  bottom: -76px;
 }

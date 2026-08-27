@@ -143,7 +143,7 @@ function HallOfFamePanel() {
   };
 
   return (
-    <section className="h-auto min-h-[510px] w-full overflow-hidden rounded-[15px] bg-[#000D1C] px-4 sm:px-[20px] py-[20px]">
+    <section className="h-auto min-h-[510px] w-full overflow-hidden rounded-[15px] bg-[var(--ink)] px-4 sm:px-[20px] py-[20px]">
       <div className="flex items-center justify-between">
         <h2 className="text-[18px] sm:text-[20px] font-semibold uppercase tracking-[0.5px] text-white">
           Hall of Fame
@@ -170,8 +170,8 @@ function HallOfFamePanel() {
               className={[
                 "h-[34px] sm:h-[37px] shrink-0 rounded-[8px] border px-3 sm:px-[14px] text-xs sm:text-[14px] font-medium transition whitespace-nowrap",
                 isActive
-                  ? "border-[#D9B700] bg-[#D9B700] text-[#000D1C]"
-                  : "border-[#C2B2B240] bg-transparent text-[#B1A393] hover:border-[#D9B700] hover:text-[#D9B700]",
+                  ? "border-[var(--gold)] bg-[var(--gold)] text-[var(--ink)]"
+                  : "border-[#C2B2B240] bg-transparent text-[#B1A393] hover:border-[var(--gold)] hover:text-[var(--gold)]",
               ].join(" ")}
             >
               {tab.label}
@@ -186,7 +186,7 @@ function HallOfFamePanel() {
         <button
           type="button"
           onClick={() => scrollCards("left")}
-          className="absolute hidden md:flex left-[-12px] top-1/2 z-20 h-[30px] w-[30px] -translate-y-1/2 items-center justify-center rounded-full border border-[#C2B2B240] bg-[#000D1C]/80 text-[#B1A393] transition hover:text-white"
+          className="absolute hidden md:flex left-[-12px] top-1/2 z-20 h-[30px] w-[30px] -translate-y-1/2 items-center justify-center rounded-full border border-[#C2B2B240] bg-[var(--ink)]/80 text-[#B1A393] transition hover:text-white"
         >
           <ArrowLeft size={16} />
         </button>
@@ -205,7 +205,7 @@ function HallOfFamePanel() {
         <button
           type="button"
           onClick={() => scrollCards("right")}
-          className="absolute hidden md:flex right-[-12px] top-1/2 z-20 h-[30px] w-[30px] -translate-y-1/2 items-center justify-center rounded-full border border-[#C2B2B240] bg-[#000D1C]/80 text-[#B1A393] transition hover:text-white"
+          className="absolute hidden md:flex right-[-12px] top-1/2 z-20 h-[30px] w-[30px] -translate-y-1/2 items-center justify-center rounded-full border border-[#C2B2B240] bg-[var(--ink)]/80 text-[#B1A393] transition hover:text-white"
         >
           <ArrowRight size={16} />
         </button>
@@ -246,7 +246,7 @@ function InducteeCard({ item }: { item: Inductee }) {
 
 function QuickActions() {
   return (
-    <section className="h-auto min-h-[245px] w-full rounded-[15px] bg-[#000D1C] px-4 sm:px-[20px] py-[15px] sm:py-[12px]">
+    <section className="h-auto min-h-[245px] w-full rounded-[15px] bg-[var(--ink)] px-4 sm:px-[20px] py-[15px] sm:py-[12px]">
       <h2 className="text-[18px] sm:text-[20px] font-semibold uppercase tracking-[0.5px] text-white">
         Quick Actions
       </h2>
@@ -260,12 +260,12 @@ function QuickActions() {
             <Link
               key={action.title}
               href={action.href}
-              className="group flex flex-col justify-between h-auto min-h-[85px] sm:h-[79.33px] rounded-[7px] border-[0.67px] border-[#FFFFFF26] bg-[#181D22] p-[10px] transition duration-200 hover:border-[#D9B700]/60 hover:bg-[#1f252b]"
+              className="group flex flex-col justify-between h-auto min-h-[85px] sm:h-[79.33px] rounded-[7px] border-[0.67px] border-[#FFFFFF26] bg-[#181D22] p-[10px] transition duration-200 hover:border-[var(--gold)]/60 hover:bg-[#1f252b]"
             >
-              <Icon size={18} strokeWidth={2} className="text-[#858062] transition-colors group-hover:text-[#D9B700]" />
+              <Icon size={18} strokeWidth={2} className="text-[#858062] transition-colors group-hover:text-[var(--gold)]" />
 
               <div>
-                <h3 className="mt-[6px] sm:mt-[7px] text-[11px] font-bold text-[#D9B700]">
+                <h3 className="mt-[6px] sm:mt-[7px] text-[11px] font-bold text-[var(--gold)]">
                   {action.title}
                 </h3>
 
@@ -283,7 +283,7 @@ function QuickActions() {
 
 function RegionStats() {
   return (
-    <section className="h-auto min-h-[243px] w-full rounded-[15px] bg-[#000D1C] px-4 sm:px-[25px] py-[15px] sm:py-[12px]">
+    <section className="h-auto min-h-[243px] w-full rounded-[15px] bg-[var(--ink)] px-4 sm:px-[25px] py-[15px] sm:py-[12px]">
       <h2 className="text-[18px] sm:text-[20px] font-semibold uppercase tracking-[0.5px] text-white">
         By Region
       </h2>
@@ -301,7 +301,7 @@ function RegionStats() {
 
             <div className="flex-1 h-[7px] sm:h-[9px] overflow-hidden rounded-full bg-[#34404C]">
               <div
-                className="h-full rounded-full bg-[#D9B700]"
+                className="h-full rounded-full bg-[var(--gold)]"
                 style={{ width: `${(region.value / region.max) * 100}%` }}
               />
             </div>

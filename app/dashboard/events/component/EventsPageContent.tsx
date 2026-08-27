@@ -141,14 +141,14 @@ export default function EventsPageContent() {
   }, [events]);
 
   return (
-    <main className="min-h-screen w-full bg-[#F5EBE1] px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-10 2xl:px-10">
+    <main className="min-h-screen w-full bg-[var(--paper)] px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-10 2xl:px-10">
       <div className="mx-auto w-full max-w-[1500px]">
         {/* ==================================================
             PAGE HEADER
         ================================================== */}
 
         <header>
-          <h1 className="text-[30px] font-bold uppercase leading-none text-[#000D1C] sm:text-[36px] lg:text-[40px]">
+          <h1 className="font-serif text-[32px] font-medium leading-none text-[var(--ink)] sm:text-[40px] lg:text-[46px]">
             Events
           </h1>
 
@@ -191,7 +191,7 @@ function FeaturedEvent({
   onRegister: () => void;
 }) {
   return (
-    <article className="min-w-0 overflow-hidden rounded-[15px] bg-[#000D1C] p-4 sm:p-5 lg:p-6">
+    <article className="min-w-0 overflow-hidden rounded-[15px] bg-[var(--ink)] p-4 sm:p-5 lg:p-6">
       {/* Label */}
 
       <p className="text-[12px] font-bold uppercase tracking-[0.04em] text-[#B1A393] sm:text-[14px] lg:text-[16px]">
@@ -265,7 +265,7 @@ function FeaturedEvent({
             "inline-flex h-[48px] w-full items-center justify-center gap-3 rounded-lg px-5 text-[14px] font-bold text-white transition-all duration-200 sm:w-auto sm:text-[15px]",
             registered
               ? "cursor-default bg-[#3C6F55]"
-              : "bg-[#D7263D] hover:bg-[#BE1F35] active:scale-[0.98]",
+              : "bg-[var(--crimson)] hover:bg-[var(--crimson-deep)] active:scale-[0.98]",
           ].join(" ")}
         >
           {registered ? (
@@ -303,7 +303,7 @@ function UpcomingEvents({ events: upcomingEvents }: { events: EventItem[] }) {
           All Upcoming Events
         </h2>
 
-        <span className="flex h-7 min-w-7 items-center justify-center rounded-full bg-white/10 px-2 text-[11px] font-bold text-[#D9B700]">
+        <span className="flex h-7 min-w-7 items-center justify-center rounded-full bg-white/10 px-2 text-[11px] font-bold text-[var(--gold)]">
           {upcomingEvents.length}
         </span>
       </div>
@@ -361,7 +361,7 @@ function UpcomingEventCard({
       <div className="overflow-hidden rounded-[15px] bg-[#181D22] sm:rounded-xl">
         {/* Image */}
 
-        <div className="relative h-[170px] w-full overflow-hidden border border-[#D9B700]/70 sm:h-[92px] sm:rounded-t-xl">
+        <div className="relative h-[170px] w-full overflow-hidden border border-[var(--gold)]/70 sm:h-[92px] sm:rounded-t-xl">
           <Image
             src={event.image}
             alt={event.title}
@@ -392,7 +392,7 @@ function UpcomingEventCard({
             />
 
             <div className="leading-none">
-              <p className="text-[23px] font-bold text-[#D9B700] sm:text-[24px] lg:text-[25px]">
+              <p className="text-[23px] font-bold text-[var(--gold)] sm:text-[24px] lg:text-[25px]">
                 {event.day}
               </p>
 

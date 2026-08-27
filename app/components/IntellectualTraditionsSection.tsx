@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useRef, useState } from "react";
 import ScrollReveal from "./animations/ScrollReveal";
 
 type LiteraryFigure = {
@@ -45,35 +48,80 @@ const literaryFigures: LiteraryFigure[] = [
 ];
 
 export default function IntellectualTraditionsSection() {
+  const railRef = useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const dragStart = useRef({ x: 0, scrollLeft: 0 });
+
+  const beginDrag = (clientX: number) => {
+    if (!railRef.current) return;
+    setIsDragging(true);
+    dragStart.current = { x: clientX, scrollLeft: railRef.current.scrollLeft };
+  };
+
+  const continueDrag = (clientX: number) => {
+    if (!isDragging || !railRef.current) return;
+    const delta = clientX - dragStart.current.x;
+    railRef.current.scrollLeft = dragStart.current.scrollLeft - delta;
+  };
+
+  const endDrag = () => setIsDragging(false);
+
   return (
     <ScrollReveal as="section" className="w-full bg-[#F5EBE1] py-12 sm:py-16 lg:py-[72px]">
       <div className="mx-auto w-full max-w-[1500px] px-4 sm:px-10 lg:px-12">
-        <header>
-          <div className="flex items-center gap-3 text-[#A54350] sm:gap-4">
-            <span className="font-serif text-[22px] italic leading-none sm:text-[26px] lg:text-[30px]">
-              III.
-            </span>
+        <header className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <div className="flex items-center gap-3 text-[#A54350] sm:gap-4">
+              <span className="font-serif text-[22px] italic leading-none sm:text-[26px] lg:text-[30px]">
+                III.
+              </span>
 
-            <p className="text-base font-semibold uppercase tracking-[0.02em] sm:text-lg lg:text-[22px]">
-              Intellectual &amp; Literary Traditions
-            </p>
+              <p className="text-base font-semibold uppercase tracking-[0.02em] sm:text-lg lg:text-[22px]">
+                Intellectual &amp; Literary Traditions
+              </p>
+            </div>
+
+            <h2 className="mt-5 max-w-[720px] font-serif text-[clamp(32px,7.5vw,74px)] font-medium leading-[1.1] tracking-[-0.02em] text-[var(--ink)] sm:mt-7 sm:leading-[1.05] sm:tracking-[-0.035em]">
+              Voices that moved a nation
+            </h2>
           </div>
 
-          <h2 className="mt-5 text-[clamp(32px,7.5vw,74px)] font-bold leading-[1.1] tracking-[-0.02em] text-[#000D1C] sm:mt-7 sm:leading-[1.05] sm:tracking-[-0.035em]">
-            Voices that moved a nation
-          </h2>
-
-          <p className="mt-5 max-w-[1080px] text-[clamp(16px,2.3vw,29px)] leading-[1.5] text-[#555D68] sm:mt-7 sm:leading-[1.55]">
+          <p className="max-w-[420px] text-[15px] font-normal leading-[1.55] text-[#2B3037] sm:text-[17px]">
             18th–19th century thought leaders whose words transformed public
             consciousness and reshaped moral debate across continents.
           </p>
         </header>
 
-        <div className="mt-10 grid grid-cols-1 gap-5 xs:grid-cols-2 sm:mt-[70px] sm:gap-6 md:grid-cols-3 xl:grid-cols-4">
-          {literaryFigures.map((figure) => (
-            <LiteraryFigureCard key={figure.id} figure={figure} />
+        <div
+          ref={railRef}
+          role="region"
+          aria-label="Intellectual and literary traditions"
+          tabIndex={0}
+          onMouseDown={(e) => beginDrag(e.clientX)}
+          onMouseMove={(e) => continueDrag(e.clientX)}
+          onMouseUp={endDrag}
+          onMouseLeave={endDrag}
+          onTouchStart={(e) => beginDrag(e.touches[0].clientX)}
+          onTouchMove={(e) => continueDrag(e.touches[0].clientX)}
+          onTouchEnd={endDrag}
+          className={[
+            "mt-10 flex gap-6 overflow-x-auto pb-4 sm:mt-16",
+            "select-none scroll-smooth",
+            "[scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
+            isDragging ? "cursor-grabbing" : "cursor-grab",
+          ].join(" ")}
+        >
+          {literaryFigures.map((figure, index) => (
+            <LiteraryFigureCard key={figure.id} figure={figure} index={index} />
           ))}
+
+          {/* Trailing spacer so the last card can clear the viewport edge */}
+          <div className="w-1 shrink-0 sm:w-6" />
         </div>
+
+        <p className="mt-5 font-montserrat text-sm text-[#96908A] sm:text-base">
+          ← Drag to read on →
+        </p>
       </div>
     </ScrollReveal>
   );
@@ -81,35 +129,46 @@ export default function IntellectualTraditionsSection() {
 
 function LiteraryFigureCard({
   figure,
+  index,
 }: {
   figure: LiteraryFigure;
+  index: number;
 }) {
   return (
-    <article className="overflow-hidden rounded-[8px] border border-white/10 bg-[linear-gradient(205.51deg,#282610_4.55%,#111419_38.62%)]">
-      <div className="relative h-[200px] w-full overflow-hidden sm:h-[220px] lg:h-[245px]">
+    <article
+      className={[
+        "plaque-card relative w-[260px] shrink-0 overflow-hidden rounded-[8px]",
+        "bg-[linear-gradient(205.51deg,#282610_4.55%,#111419_38.62%)]",
+        "sm:w-[300px]",
+        index % 2 === 1 ? "sm:mt-8" : "",
+      ].join(" ")}
+    >
+      <div className="relative h-[340px] w-full overflow-hidden sm:h-[400px]">
         <Image
           src={figure.image}
           alt={figure.name}
           fill
-          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1280px) 33vw, 25vw"
-          className="object-cover object-top"
+          draggable={false}
+          sizes="300px"
+          className="pointer-events-none object-cover object-top"
         />
 
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#111419]/35" />
-      </div>
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#111419] via-[#111419]/25 to-transparent" />
 
-      <div className="px-4 pb-5 pt-5 text-center sm:px-5 sm:pb-6">
-        <h3 className="text-[17px] font-semibold uppercase leading-[1.2] text-white sm:text-[19px]">
-          {figure.name}
-        </h3>
+        {/* Name plate over the image, museum-label style */}
+        <div className="absolute inset-x-0 bottom-0 px-5 pb-6 pt-10">
+          <h3 className="text-[19px] font-semibold uppercase leading-[1.2] text-white">
+            {figure.name}
+          </h3>
 
-        <p className="mt-2 text-sm font-medium text-[#BFB2A3] sm:mt-3 sm:text-[16px]">
-          {figure.years}
-        </p>
+          <p className="mt-1.5 text-[13px] font-medium text-[#D9B700]">
+            {figure.years}
+          </p>
 
-        <p className="mx-auto mt-4 max-w-[260px] text-[13px] leading-[1.55] text-[#F1ECE7] sm:mt-5">
-          {figure.description}
-        </p>
+          <p className="mt-3 max-w-[240px] text-[12px] leading-[1.55] text-[#F1ECE7]">
+            {figure.description}
+          </p>
+        </div>
       </div>
     </article>
   );

@@ -234,8 +234,8 @@ export default function AwardDirectory() {
                 className={[
                   "h-14 shrink-0 border-b-4 text-xs sm:text-sm lg:text-base font-semibold uppercase transition whitespace-nowrap",
                   isActive
-                    ? "border-[#D7263D] text-[#D7263D]"
-                    : "border-transparent text-[#111419] hover:text-[#D7263D]",
+                    ? "border-[var(--crimson)] text-[var(--crimson)]"
+                    : "border-transparent text-[#111419] hover:text-[var(--crimson)]",
                 ].join(" ")}
               >
                 {category}
@@ -287,7 +287,7 @@ export default function AwardDirectory() {
       </div>
 
       {/* Directory Grid / Table Wrapper */}
-      <div className="mt-8 rounded-[15px] bg-[#000D1C] px-4 py-6 sm:px-7 sm:py-8 overflow-hidden">
+      <div className="mt-8 rounded-[15px] bg-[var(--ink)] px-4 py-6 sm:px-7 sm:py-8 overflow-hidden">
         
         {/* Widescreen Desktop Header Only */}
         <div className="hidden lg:grid lg:grid-cols-[2.5fr_1.5fr_1.2fr_0.8fr_1.2fr_1fr] items-center gap-4 text-sm font-bold uppercase text-[#B1A393] border-b border-[#FFFFFF1A] pb-4">
@@ -375,7 +375,7 @@ function AwardRow({ award, isFirst }: { award: Award; isFirst: boolean }) {
       <div className="pt-2 lg:pt-0">
         <Link
           href="/dashboard/community"
-          className="flex h-[38px] sm:h-[42px] lg:h-[46px] w-full lg:ml-auto lg:max-w-[100px] items-center justify-center rounded-lg bg-[#D7263D] text-xs sm:text-sm lg:text-base font-bold text-white transition hover:bg-[#D7263D]/90 active:scale-[0.98]"
+          className="flex h-[38px] sm:h-[42px] lg:h-[46px] w-full lg:ml-auto lg:max-w-[100px] items-center justify-center rounded-lg bg-[var(--crimson)] text-xs sm:text-sm lg:text-base font-bold text-white transition hover:bg-[var(--crimson)]/90 active:scale-[0.98]"
         >
           View
         </Link>
@@ -398,7 +398,7 @@ function FilterSelect({
       <select
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="h-[50px] sm:h-[54px] w-full sm:min-w-[180px] appearance-none rounded-lg border border-[#C2B2B2] bg-[#F5EBE1] px-4 pr-11 text-sm sm:text-base font-semibold text-[#111419] outline-none"
+        className="h-[50px] sm:h-[54px] w-full sm:min-w-[180px] appearance-none rounded-lg border border-[#C2B2B2] bg-[var(--paper)] px-4 pr-11 text-sm sm:text-base font-semibold text-[#111419] outline-none"
       >
         {options.map((option) => (
           <option key={option}>{option}</option>
@@ -407,7 +407,7 @@ function FilterSelect({
 
       <ChevronDown
         size={20}
-        className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#000D1C]"
+        className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[var(--ink)]"
       />
     </div>
   );
@@ -434,7 +434,7 @@ function Pagination({
           className={[
             "h-10 w-10 sm:h-14 sm:w-14 rounded-md border text-sm sm:text-xl font-bold transition",
             page === item
-              ? "border-[#D7263D] bg-[linear-gradient(205.51deg,#FFFFFF_4.55%,#F5EBE1_38.62%)] text-[#000D1C]"
+              ? "border-[var(--crimson)] bg-[linear-gradient(205.51deg,#FFFFFF_4.55%,var(--paper)_38.62%)] text-[var(--ink)]"
               : "border-[#E9DCD3] text-[#7B7B7B]",
           ].join(" ")}
         >

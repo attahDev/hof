@@ -6,7 +6,7 @@ export default function HeroSection() {
   return (
     <section className="flex w-full flex-col gap-5 lg:flex-row">
       {/* LEFT HERO */}
-      <div className="relative min-h-[280px] flex-1 overflow-hidden rounded-[15px] bg-[#000D1C] lg:h-[300px]">
+      <div className="relative min-h-[280px] flex-1 overflow-hidden rounded-[15px] bg-[var(--ink)] lg:h-[300px]">
         {/* Hero image — right side, flush to bottom */}
         <div className="pointer-events-none absolute bottom-0 right-0 z-0 h-[85%] w-[70%] sm:h-full sm:w-[58%] lg:w-[62%]">
           <Image
@@ -20,15 +20,15 @@ export default function HeroSection() {
         </div>
 
         {/* Soft fade into text */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-[1] hidden w-[48%] bg-[#000D1C] lg:block" />
-        <div className="pointer-events-none absolute inset-y-0 left-[38%] z-[2] hidden w-[22%] bg-gradient-to-r from-[#000D1C] via-[#000D1C]/70 to-transparent lg:block" />
-        <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-r from-[#000D1C] via-[#000D1C]/90 to-[#000D1C]/20 lg:hidden" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-[1] hidden w-[48%] bg-[var(--ink)] lg:block" />
+        <div className="pointer-events-none absolute inset-y-0 left-[38%] z-[2] hidden w-[22%] bg-gradient-to-r from-[var(--ink)] via-[var(--ink)]/70 to-transparent lg:block" />
+        <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-r from-[var(--ink)] via-[var(--ink)]/90 to-[var(--ink)]/20 lg:hidden" />
 
         {/* Content */}
         <div className="relative z-10 flex h-full max-w-[420px] flex-col justify-center px-6 py-8 sm:px-8 lg:justify-start lg:px-[26px] lg:py-[26px]">
           <h1 className="text-[22px] font-bold uppercase leading-tight tracking-[0.2px] text-white sm:text-[25px] sm:leading-[31px]">
             WELCOME BACK,{" "}
-            {/* <span className="text-[#D9B700]">MICHAEL</span> */}
+            {/* <span className="text-[var(--gold)]">MICHAEL</span> */}
           </h1>
 
           <p className="mt-2 text-[16px] font-medium leading-snug text-[#B1A393] sm:mt-[9px] sm:text-[18px] sm:leading-[24px]">
@@ -42,7 +42,7 @@ export default function HeroSection() {
 
           <Link
             href="/dashboard/inductees"
-            className="mt-6 flex h-[44px] w-[160px] items-center justify-center gap-3 rounded-[7px] bg-[#D9B700] text-sm font-semibold text-[#000D1C] transition hover:bg-[#D9B700]/90 sm:mt-[27px] sm:h-[46px] sm:w-[178px] sm:gap-[14px] sm:text-[16px]"
+            className="mt-6 flex h-[44px] w-[160px] items-center justify-center gap-3 rounded-[7px] bg-[var(--gold)] text-sm font-semibold text-[var(--ink)] transition hover:bg-[var(--gold)]/90 sm:mt-[27px] sm:h-[46px] sm:w-[178px] sm:gap-[14px] sm:text-[16px]"
           >
             Explore Legacy
             <ArrowRight size={18} strokeWidth={2.5} className="sm:size-5" />
@@ -51,7 +51,7 @@ export default function HeroSection() {
       </div>
 
       {/* RIGHT STATS */}
-      <div className="grid h-auto w-full shrink-0 grid-cols-2 overflow-hidden rounded-[15px] bg-[#000D1C] lg:h-[300px] lg:w-[400px]">
+      <div className="grid h-auto w-full shrink-0 grid-cols-2 overflow-hidden rounded-[15px] bg-[var(--ink)] lg:h-[300px] lg:w-[400px]">
         <div className="rounded-br-[32px] border-b border-r border-[#C2B2B240] p-4 sm:p-0">
           <StatCard
             icon={
@@ -275,7 +275,7 @@ function StatCard({
         <div className="mb-[10px] text-[#858062] sm:mb-[18px]">{icon}</div>
 
         <div className="flex items-end gap-[7px]">
-          <h2 className="text-[24px] font-medium leading-none text-[#D9B700] sm:text-[30px]">
+          <h2 className="text-[24px] font-medium leading-none text-[var(--gold)] sm:text-[30px]">
             {value}
           </h2>
         </div>

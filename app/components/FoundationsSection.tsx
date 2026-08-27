@@ -66,19 +66,26 @@ export default function FoundationsSection() {
           </p>
         </div>
 
-        <h2 className="mt-5 max-w-[920px] text-[clamp(34px,7vw,76px)] font-bold leading-[1.1] tracking-[-0.02em] text-[#000D1C] sm:mt-8 sm:leading-[1.05] sm:tracking-[-0.04em]">
+        <h2 className="mt-5 max-w-[920px] font-serif text-[clamp(34px,7vw,76px)] font-medium leading-[1.1] tracking-[-0.02em] text-[var(--ink)] sm:mt-8 sm:leading-[1.05] sm:tracking-[-0.04em]">
           Foundations of Greatness
         </h2>
 
-        <p className="mt-5 max-w-[1220px] text-[clamp(17px,2.2vw,30px)] leading-[1.5] text-[#59616A] sm:mt-8 sm:leading-[1.55]">
+        <p className="mt-5 max-w-[1220px] text-[clamp(17px,2.2vw,30px)] leading-[1.5] text-[#2B3037] sm:mt-8 sm:leading-[1.55]">
           Pre-1900 leadership and power. These figures represent early
           visibility, sovereignty and resistance proof that Black excellence
           has always existed at the centre of history.
         </p>
 
         <div className="mt-10 grid grid-cols-1 gap-5 xs:grid-cols-2 sm:mt-16 sm:gap-7 md:grid-cols-3 xl:grid-cols-5">
-          {foundations.map((person) => (
-            <FoundationCard key={person.name} {...person} />
+          {foundations.map((person, index) => (
+            <div
+              key={person.name}
+              className={
+                index % 2 === 1 ? "xl:mt-12" : index % 3 === 2 ? "xl:mt-6" : ""
+              }
+            >
+              <FoundationCard {...person} />
+            </div>
           ))}
         </div>
       </div>

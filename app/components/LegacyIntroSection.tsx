@@ -22,7 +22,7 @@ export default function LegacyIntroSection() {
           <h2
             className="
               relative z-10
-              font-montserrat text-[clamp(32px,9vw,72px)] font-medium uppercase
+              font-serif text-[clamp(32px,9vw,72px)] font-medium
               leading-tight sm:leading-none lg:text-[clamp(48px,4.5vw,72px)]
               bg-[linear-gradient(180deg,#E7E1D3_0%,#BBA486_100%)]
               bg-clip-text text-transparent

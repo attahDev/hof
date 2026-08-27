@@ -64,8 +64,9 @@ export default function ManchesterInfluenceSection() {
             className="
               mt-7
               max-w-[900px]
+              font-serif
               text-[65px]
-              font-bold
+              font-medium
               leading-[1.08]
               tracking-[-0.03em]
               text-white
@@ -196,7 +197,7 @@ function FeaturedInfluenceCard() {
         <div className="relative min-h-[360px] overflow-hidden md:min-h-[466px]">
           <Image
             src="/home/bell.png"
-            alt="Erinma Bell"
+            alt="Prof Erinma Bell MBE DL JP"
             fill
             priority
             sizes="(max-width: 768px) 100vw, 320px"
@@ -235,8 +236,8 @@ function FeaturedInfluenceCard() {
             Spirit of Manchester
           </span>
 
-          <h3 className="mt-8 text-[28px] font-semibold uppercase leading-tight text-white">
-            Erinma Bell
+          <h3 className="mt-8 text-[24px] font-semibold uppercase leading-tight text-white">
+           Prof Erinma Bell MBE DL JP
           </h3>
 
           <p className="mt-3 text-[15px] uppercase text-[#BFB2A3]">

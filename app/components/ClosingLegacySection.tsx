@@ -13,10 +13,10 @@ export default function ClosingLegacySection() {
             Inspired by Legacy. Built by Community
           </p>
 
-          <h2 className="mt-5 text-[clamp(54px,6vw,82px)] font-medium leading-[1.02] tracking-[-0.035em] text-[#17120F]">
+          <h2 className="mt-5 font-serif text-[clamp(54px,6vw,82px)] font-medium leading-[1.02] tracking-[-0.035em] text-[#17120F]">
             Legacy continues
             <br />
-            with us.
+            <span className="italic text-[var(--gold-deep)]">with us.</span>
           </h2>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-8">

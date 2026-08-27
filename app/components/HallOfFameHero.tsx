@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const heroPortraits = [
   "/hero/herotest.png",
@@ -20,123 +19,135 @@ const heroPortraits = [
 ];
 
 export default function HallOfFameHero() {
-  const [activeImage, setActiveImage] = useState(0);
   const reduceMotion = useReducedMotion();
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveImage((current) => (current + 1) % heroPortraits.length);
-    }, 1200);
-
-    return () => clearInterval(interval);
-  }, []);
 
   const headlineTransition = reduceMotion
     ? { duration: 0 }
     : { duration: 0.6, ease: "easeOut" as const };
 
   return (
-    <section className="relative flex min-h-[588px] w-full overflow-hidden bg-[#F5EBE1] px-5 py-14 sm:px-10 sm:py-16 lg:px-16">
-      <div className="relative mx-auto w-full max-w-[1500px]">
-        <div className="mx-auto flex w-full max-w-[1100px] flex-col gap-5 pt-10 sm:gap-7 lg:pt-16">
-          <div className="flex items-center justify-center whitespace-nowrap">
-            <motion.h1
-              className="font-montserrat text-[clamp(48px,9vw,115px)] font-medium uppercase leading-[1] tracking-normal text-[#000D1C]"
-              initial={reduceMotion ? false : { opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ ...headlineTransition, delay: 0.1 }}
-            >
-              Time To Enter
-            </motion.h1>
-          </div>
-
-          <div className="flex items-center justify-center gap-[clamp(18px,2.5vw,35px)]">
-            <div className="relative h-[clamp(75px,9vw,140px)] w-[clamp(95px,12vw,180px)] shrink-0 overflow-hidden bg-[#000D1C]">
-              <AnimatePresence mode="sync">
-                <motion.div
-                  key={heroPortraits[activeImage]}
-                  className="absolute inset-0"
-                  initial={reduceMotion ? false : { opacity: 0, scale: 1.03 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={reduceMotion ? undefined : { opacity: 0, scale: 1 }}
-                  transition={{ duration: 0.8, ease: "easeInOut" }}
-                >
-                  <Image
-                    src={heroPortraits[activeImage]}
-                    alt={`Hall of Fame inductee ${activeImage + 1}`}
-                    fill
-                    priority={activeImage === 0}
-                    sizes="(max-width: 640px) 95px, (max-width: 1024px) 150px, 180px"
-                    className="object-cover object-top"
-                  />
-                </motion.div>
-              </AnimatePresence>
-            </div>
-
-            <motion.h2
-              className="font-montserrat text-[clamp(52px,9vw,126px)] font-medium uppercase leading-[1] tracking-normal text-[#000D1C]"
-              initial={reduceMotion ? false : { opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ ...headlineTransition, delay: 0.25 }}
-            >
-              History
-            </motion.h2>
-          </div>
-        </div>
-
-        <motion.div
-          className="mt-12 flex justify-center sm:mt-16 sm:justify-end lg:mt-8"
-          initial={reduceMotion ? false : { opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ ...headlineTransition, delay: 0.45 }}
-        >
-          <div className="flex flex-col items-center sm:items-end">
-            <div className="relative size-[110px] sm:size-[125px] lg:size-[135px]">
+    <section className="relative w-full overflow-hidden bg-[#F5EBE1] pb-0 pt-14 sm:pt-16 lg:pt-20">
+      <div className="mx-auto flex w-full max-w-[1500px] flex-col gap-10 px-5 sm:px-10 lg:flex-row lg:items-end lg:justify-between lg:gap-6 lg:px-16">
+        {/* Left: identity block */}
+        <div className="flex max-w-[620px] flex-col">
+          <motion.div
+            className="flex items-center gap-3"
+            initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={headlineTransition}
+          >
+            <div className="relative size-[44px] shrink-0">
               <Image
                 src="/logo/hlogo.svg"
                 alt="Black Tech Expo Hall of Fame"
                 fill
                 priority
-                sizes="135px"
+                sizes="44px"
                 className="object-contain"
               />
             </div>
 
-            <div className="mt-3 text-center sm:text-right">
-              <p
-                className="
-                  bg-[linear-gradient(82.9deg,#000D1C_-59.86%,#4D3218_43.8%)]
-                  bg-clip-text
-                  font-montserrat
-                  text-[22px]
-                  font-bold
-                  leading-[22px]
-                  tracking-[-0.41px]
-                  text-transparent
-                "
-              >
-                Black Tech Expo
-              </p>
+            <p className="font-montserrat text-[13px] font-semibold uppercase tracking-[0.22em] text-[var(--gold-dim)]">
+              Black Tech Expo
+            </p>
+          </motion.div>
 
-              <p
-                className="
-                  mt-1
-                  bg-[linear-gradient(82.9deg,#000D1C_-59.86%,#4D3218_43.8%)]
-                  bg-clip-text
-                  font-montserrat
-                  text-[22px]
-                  font-bold
-                  leading-[22px]
-                  tracking-[-0.41px]
-                  text-transparent
-                "
+          <motion.h1
+            className="mt-6 font-serif text-[clamp(52px,9vw,116px)] font-medium leading-[0.96] tracking-[-0.015em] text-[var(--ink)]"
+            initial={reduceMotion ? false : { opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ ...headlineTransition, delay: 0.12 }}
+          >
+            The Hall
+            <br />
+            <span className="italic text-[var(--gold-deep)]">of Fame</span>
+          </motion.h1>
+
+          <motion.p
+            className="mt-6 max-w-[480px] font-montserrat text-[17px] font-light leading-relaxed text-[#3A4249] sm:text-[19px]"
+            initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ ...headlineTransition, delay: 0.28 }}
+          >
+            A living archive of the leaders, thinkers and builders whose
+            legacy still moves us forward — six centuries, one continuous
+            record.
+          </motion.p>
+        </div>
+
+        {/* Right: a preview of who's kept here */}
+        <motion.div
+          className="w-full max-w-[420px] lg:w-[380px]"
+          initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ ...headlineTransition, delay: 0.42 }}
+        >
+          <p className="font-montserrat text-[12px] font-semibold uppercase tracking-[0.16em] text-[#96908A]">
+            Featured in the archive
+          </p>
+
+          <div className="mt-4 grid grid-cols-4 gap-2.5 sm:grid-cols-6 lg:grid-cols-4">
+            {heroPortraits.slice(0, 8).map((src, index) => (
+              <div
+                key={src}
+                className={[
+                  "relative aspect-[3/4] overflow-hidden rounded-[3px] bg-[#000D1C]",
+                  index % 5 === 0 ? "lg:col-span-2 lg:row-span-2 lg:aspect-square" : "",
+                ].join(" ")}
               >
-                Hall of Fame
-              </p>
-            </div>
+                <Image
+                  src={src}
+                  alt=""
+                  fill
+                  priority={index === 0}
+                  sizes="120px"
+                  className="object-cover object-top"
+                />
+              </div>
+            ))}
           </div>
         </motion.div>
       </div>
+
+      {/* Marquee — a continuous procession of the archive's portraits */}
+      <div className="relative mt-12 w-full overflow-hidden border-t border-black/10 py-6 sm:mt-16">
+        <div
+          className={[
+            "flex w-max gap-4",
+            reduceMotion ? "" : "animate-[hero-marquee_38s_linear_infinite]",
+          ].join(" ")}
+        >
+          {[...heroPortraits, ...heroPortraits].map((src, index) => (
+            <div
+              key={`${src}-${index}`}
+              className="relative h-[86px] w-[68px] shrink-0 overflow-hidden rounded-[3px] bg-[#000D1C] sm:h-[110px] sm:w-[88px]"
+            >
+              <Image
+                src={src}
+                alt=""
+                fill
+                sizes="88px"
+                className="object-cover object-top grayscale transition duration-500 hover:grayscale-0"
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Edge fades so the marquee doesn't hard-cut */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#F5EBE1] to-transparent sm:w-28" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#F5EBE1] to-transparent sm:w-28" />
+      </div>
+
+      <style jsx>{`
+        @keyframes hero-marquee {
+          from {
+            transform: translateX(0);
+          }
+          to {
+            transform: translateX(-50%);
+          }
+        }
+      `}</style>
     </section>
   );
 }

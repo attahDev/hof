@@ -139,11 +139,11 @@ export default function LegacyTimelineSection() {
             </p>
           </div>
 
-          <h2 className="mt-5 max-w-[850px] font-montserrat text-[clamp(30px,8vw,72px)] font-bold leading-[1.1] tracking-[-0.015em] text-[#000D1C] sm:mt-8 sm:leading-[1.05] sm:tracking-[-0.035em]">
+          <h2 className="mt-5 max-w-[850px] font-serif text-[clamp(30px,8vw,72px)] font-medium leading-[1.1] tracking-[-0.015em] text-[var(--ink)] sm:mt-8 sm:leading-[1.05] sm:tracking-[-0.035em]">
             Six centuries of impact, one continuum
           </h2>
 
-          <p className="mt-4 max-w-[800px] font-montserrat text-[clamp(16px,3vw,27px)] font-normal leading-[1.45] text-[#4E5660] sm:mt-7 sm:leading-[1.55]">
+          <p className="mt-4 max-w-[800px] font-montserrat text-[clamp(16px,3vw,27px)] font-normal leading-[1.45] text-[#2B3037] sm:mt-7 sm:leading-[1.55]">
             From ancient kingdoms to modern innovators, Black excellence has
             shaped the world. Scroll through the record.
           </p>
@@ -186,7 +186,7 @@ export default function LegacyTimelineSection() {
         </div>
 
         <div className="mt-5 px-5 sm:mt-6 sm:px-10 lg:px-12">
-          <p className="font-montserrat text-[clamp(14px,2.5vw,24px)] font-normal text-[#AAA29B]">
+          <p className="font-montserrat text-[clamp(14px,2.5vw,24px)] font-medium text-[#5C554E]">
             ← Drag to explore the archive →
           </p>
         </div>

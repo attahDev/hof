@@ -217,7 +217,7 @@ export default function HallOfFameLayout({
 
     // Common Sidebar Content to avoid duplication
     const SidebarContent = () => (
-        <aside className="flex h-full w-[300px] flex-col border-r border-[#001F3F73] bg-[#000D1C] overflow-y-auto">
+        <aside className="flex h-full w-[300px] flex-col border-r border-[#001F3F73] bg-[var(--ink)] overflow-y-auto">
             {/* Header / Logo */}
             <div className="flex h-[112px] shrink-0 items-center justify-between border-b border-[#FFFFFF1A] px-6">
                 <div className="flex items-center gap-4">
@@ -271,14 +271,14 @@ export default function HallOfFameLayout({
                                         className={[
                                             "flex h-[45px] w-full items-center gap-[10px] rounded-[10px] px-3 py-[7px] text-[15px] font-medium transition duration-200",
                                             isActive
-                                                ? "border-t border-[#D9B700] bg-[#2E2700] text-[#D9B700]"
-                                                : "text-[#BDC7D1] hover:bg-[#07182B] hover:text-[#D9B700]",
+                                                ? "border-t border-[var(--gold)] bg-[#2E2700] text-[var(--gold)]"
+                                                : "text-[#BDC7D1] hover:bg-[#07182B] hover:text-[var(--gold)]",
                                         ].join(" ")}
                                     >
                                         <Icon
                                             className={[
                                                 "size-[20px] transition-colors duration-200",
-                                                isActive ? "text-[#D9B700]" : "text-[#7A765D]"
+                                                isActive ? "text-[var(--gold)]" : "text-[#7A765D]"
                                             ].join(" ")}
                                         />
 
@@ -336,7 +336,7 @@ export default function HallOfFameLayout({
             <div className="flex min-w-0 flex-1 flex-col">
                 
                 {/* Floating Mobile Sticky Header (Visible only on smaller devices to toggle the menu) */}
-                <header className="flex h-14 items-center justify-between border-b border-[#001F3F20] bg-[#F8F4EA] px-4 xl:hidden">
+                <header className="flex h-14 items-center justify-between border-b border-[#001F3F20] bg-[var(--paper-deep)] px-4 xl:hidden">
                     <button
                         onClick={() => setIsSidebarOpen(true)}
                         className="flex h-9 w-9 items-center justify-center rounded-lg border border-[#001F3F20] text-[#001F3F] hover:bg-[#001F3F]/5"
@@ -352,7 +352,7 @@ export default function HallOfFameLayout({
                     <div className="w-9" /> {/* Spacer to align title cleanly */}
                 </header>
 
-                <main className="min-w-0 flex-1 bg-[#F5EBE1]">
+                <main className="min-w-0 flex-1 bg-[var(--paper)]">
                     {/* <Navigation /> */}
                     {children}
                 </main>

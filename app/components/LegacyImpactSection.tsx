@@ -235,30 +235,47 @@ function LegacyCollage() {
     return (
         <div className="relative flex h-full min-h-[640px] w-full items-end justify-center overflow-hidden px-4 pb-0 pt-8 sm:min-h-[700px] sm:px-6 lg:min-h-0 lg:px-0 lg:pt-0">
             <div className="relative mx-auto flex w-full max-w-[520px] flex-col items-center sm:max-w-[560px] lg:max-w-[600px]">
-                {/* Top — looking aside, nameplate baked into asset */}
-                <div className="relative z-20 w-[92%] self-start sm:w-[90%]">
+                {/* Top — Carol Ann Whitehead with nameplate overlay */}
+                <div className="relative z-20 w-[92%] self-start sm:w-[90%] aspect-[3/2] overflow-hidden">
                     <Image
-                        src="/legacy_carol2.png"
-                        alt="Carol Ann Whitehead, Executive Director Heritage & Legacy"
-                        width={900}
-                        height={600}
+                        src="/carol ann new.png"
+                        alt="Carol Ann Whitehead FRSA CMgr CCMI"
+                        fill
                         priority
                         sizes="(max-width: 1024px) 85vw, 560px"
-                        className="h-auto w-full"
+                        className="object-cover object-[center_30%] scale-110 transition-transform duration-700"
                     />
+                    {/* Lighter gradient fade — bottom blend */}
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#061018]/70 via-[#061018]/10 to-transparent" />
+                    {/* Left edge fade — lighter */}
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#061018]/30 via-transparent to-transparent" />
+                    {/* Nameplate — prominent diagonal sliced top-left, anchored bottom-right */}
+                    <div
+                        className="absolute bottom-0 right-0 z-10 bg-white pl-8 pr-4 pb-3 pt-4 sm:pl-10 sm:pr-5 sm:pb-4 sm:pt-5 max-w-[75%]"
+                        style={{ clipPath: "polygon(52px 0%, 100% 0%, 100% 100%, 0% 100%)" }}
+                    >
+                        <p className="font-montserrat text-[11px] font-bold uppercase leading-tight tracking-[0.03em] text-[#000D1C] sm:text-[13px]">
+                            Carol Ann Whitehead FRSA CMgr CCMI
+                        </p>
+                        <p className="mt-1 font-montserrat text-[9px] font-semibold uppercase leading-snug tracking-[0.06em] text-[#3A4249] sm:text-[10px]">
+                            Executive Director Heritage &amp; Legacy, BLACK<br />TECH EXPO HALL OF FAME
+                        </p>
+                    </div>
                 </div>
 
-                {/* Bottom — facing camera, stacked & slightly larger */}
-                <div className="relative z-10 -mt-[12%] w-full self-end sm:w-[96%]">
+                {/* Bottom — Miss Bell */}
+                <div className="relative z-10 -mt-[12%] w-[92%] self-end sm:w-[90%] aspect-[3/2] overflow-hidden">
                     <Image
-                        src="/legacy_carol.png"
-                        alt="Carol Ann Whitehead"
-                        width={900}
-                        height={600}
+                        src="/normination/Miss Bell.jpeg"
+                        alt="Miss Bell"
+                        fill
                         priority
-                        sizes="(max-width: 1024px) 90vw, 600px"
-                        className="h-auto w-full"
+                        sizes="(max-width: 1024px) 85vw, 560px"
+                        className="object-cover object-top"
                     />
+                    {/* Lighter gradient fade */}
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#061018]/70 via-[#061018]/10 to-transparent" />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#061018]/25" />
                 </div>
             </div>
         </div>

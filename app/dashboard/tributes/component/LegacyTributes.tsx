@@ -288,7 +288,7 @@ export default function LegacyTributes() {
         relative
         min-h-screen
         w-full
-        bg-[#F5EBE1]
+        bg-[var(--paper)]
         px-4
         py-6
         sm:px-8
@@ -307,7 +307,7 @@ export default function LegacyTributes() {
             uppercase
             leading-tight
             tracking-tight
-            text-[#000D1C]
+            text-[var(--ink)]
             sm:text-[45px]
           "
         >
@@ -340,7 +340,7 @@ export default function LegacyTributes() {
           mt-8
           overflow-hidden
           rounded-[15px]
-          bg-[#000D1C]
+          bg-[var(--ink)]
           p-5
           sm:mt-16
           sm:p-6
@@ -357,7 +357,7 @@ export default function LegacyTributes() {
             h-[220px]
             w-[220px]
             rounded-full
-            bg-[#D9B700]/10
+            bg-[var(--gold)]/10
             blur-[80px]
           "
         />
@@ -377,8 +377,8 @@ export default function LegacyTributes() {
               gap-3
               rounded-xl
               border
-              border-[#D9B700]/20
-              bg-[#D9B700]/10
+              border-[var(--gold)]/20
+              bg-[var(--gold)]/10
               p-4
               sm:flex-row
               sm:items-center
@@ -393,8 +393,8 @@ export default function LegacyTributes() {
                 items-center
                 justify-center
                 rounded-full
-                bg-[#D9B700]/20
-                text-[#D9B700]
+                bg-[var(--gold)]/20
+                text-[var(--gold)]
               "
             >
               <Sparkles size={19} />
@@ -405,7 +405,7 @@ export default function LegacyTributes() {
                 className="
                   text-sm
                   font-bold
-                  text-[#D9B700]
+                  text-[var(--gold)]
                 "
               >
                 Something Special Is Coming ✨
@@ -581,8 +581,8 @@ export default function LegacyTributes() {
                     placeholder:text-[#7F8A99]
                   `,
                   errors.message
-                    ? "border-[#D7263D]"
-                    : "border-[#5A6675] focus:border-[#D9B700]",
+                    ? "border-[var(--crimson)]"
+                    : "border-[#5A6675] focus:border-[var(--gold)]",
                 ].join(" ")}
               />
 
@@ -659,8 +659,8 @@ export default function LegacyTributes() {
                   sm:w-auto
                 `,
                 TRIBUTES_ARE_LIVE
-                  ? "bg-[#D7263D] text-white hover:bg-[#BE1F35] focus:ring-[#D7263D]/40"
-                  : "bg-[#D9B700] text-[#000D1C] hover:bg-[#E8C500] focus:ring-[#D9B700]/40",
+                  ? "bg-[var(--crimson)] text-white hover:bg-[var(--crimson-deep)] focus:ring-[var(--crimson)]/40"
+                  : "bg-[var(--gold)] text-[var(--ink)] hover:bg-[#E8C500] focus:ring-[var(--gold)]/40",
               ].join(" ")}
             >
               {TRIBUTES_ARE_LIVE
@@ -708,7 +708,7 @@ export default function LegacyTributes() {
         className="
           mt-6
           rounded-[15px]
-          bg-[#000D1C]
+          bg-[var(--ink)]
           px-5
           py-5
           sm:px-6
@@ -753,7 +753,7 @@ export default function LegacyTributes() {
               text-[#B1A393]
               transition-colors
               duration-200
-              hover:text-[#D9B700]
+              hover:text-[var(--gold)]
               sm:text-[14px]
             "
           >
@@ -832,7 +832,7 @@ export default function LegacyTributes() {
                 rounded-[22px]
                 border
                 border-white/10
-                bg-[#000D1C]
+                bg-[var(--ink)]
                 p-6
                 shadow-2xl
                 sm:p-8
@@ -849,7 +849,7 @@ export default function LegacyTributes() {
                   h-[160px]
                   w-[160px]
                   rounded-full
-                  bg-[#D9B700]/10
+                  bg-[var(--gold)]/10
                   blur-[60px]
                 "
               />
@@ -920,8 +920,8 @@ export default function LegacyTributes() {
                       items-center
                       justify-center
                       rounded-full
-                      bg-[#D9B700]/10
-                      text-[#D9B700]
+                      bg-[var(--gold)]/10
+                      text-[var(--gold)]
                     "
                   >
                     <Sparkles
@@ -938,7 +938,7 @@ export default function LegacyTributes() {
                     font-bold
                     uppercase
                     tracking-[0.15em]
-                    text-[#D9B700]
+                    text-[var(--gold)]
                   "
                 >
                   {TRIBUTES_ARE_LIVE
@@ -1006,7 +1006,7 @@ export default function LegacyTributes() {
                   >
                     <Sparkles
                       size={12}
-                      className="text-[#D9B700]"
+                      className="text-[var(--gold)]"
                     />
 
                     <p
@@ -1015,7 +1015,7 @@ export default function LegacyTributes() {
                         font-bold
                         uppercase
                         tracking-wider
-                        text-[#D9B700]
+                        text-[var(--gold)]
                       "
                     >
                       Tribute Preview
@@ -1050,7 +1050,7 @@ export default function LegacyTributes() {
                     className="
                       mt-3
                       border-l-2
-                      border-[#D9B700]/40
+                      border-[var(--gold)]/40
                       pl-3
                       text-xs
                       italic
@@ -1108,12 +1108,12 @@ export default function LegacyTributes() {
                     h-11
                     w-full
                     rounded-lg
-                    bg-[#D7263D]
+                    bg-[var(--crimson)]
                     text-sm
                     font-bold
                     text-white
                     transition
-                    hover:bg-[#BE1F35]
+                    hover:bg-[var(--crimson-deep)]
                     active:scale-[0.98]
                   "
                 >
@@ -1186,8 +1186,8 @@ function FormInput({
             placeholder:text-[#7F8A99]
           `,
           error
-            ? "border-[#D7263D]"
-            : "border-[#5A6675] focus:border-[#D9B700]",
+            ? "border-[var(--crimson)]"
+            : "border-[#5A6675] focus:border-[var(--gold)]",
         ].join(" ")}
       />
 

@@ -203,7 +203,7 @@ export default function RegionalDirectory() {
             {/* Layout Block (Stacked on Mobile/Tablet, side-by-side on Desktop) */}
             <div className="mt-8 grid grid-cols-1 lg:grid-cols-[327px_1fr] gap-6 lg:gap-[15px]">
                 {/* Region Selector Panel */}
-                <aside className="h-auto lg:h-[550px] rounded-[15px] border border-black/10 bg-[linear-gradient(205.51deg,#F5EBE1_4.55%,#DBD2C8_38.62%)] p-4 sm:p-[15px]">
+                <aside className="h-auto lg:h-[550px] rounded-[15px] border border-black/10 bg-[linear-gradient(205.51deg,var(--paper)_4.55%,#DBD2C8_38.62%)] p-4 sm:p-[15px]">
                     <div className="flex items-center justify-between px-2 lg:px-5 lg:pt-3">
                         <h2 className="text-lg lg:text-xl font-bold uppercase text-[#3C3300]">
                             Regions
@@ -211,7 +211,7 @@ export default function RegionalDirectory() {
                         {activeRegion !== "all" && (
                             <button 
                                 onClick={() => setActiveRegion("all")}
-                                className="text-xs font-semibold text-[#D7263D] hover:underline lg:hidden"
+                                className="text-xs font-semibold text-[var(--crimson)] hover:underline lg:hidden"
                             >
                                 Clear Filter
                             </button>
@@ -235,7 +235,7 @@ export default function RegionalDirectory() {
                                             : "bg-[#E7DDD1]/60 hover:bg-[#D9CDBE]",
                                     ].join(" ")}
                                 >
-                                    <span className="flex h-10 w-10 lg:h-12 lg:w-12 items-center justify-center rounded-full border border-black/15 bg-[#F8F4EA] text-[#111419] shrink-0">
+                                    <span className="flex h-10 w-10 lg:h-12 lg:w-12 items-center justify-center rounded-full border border-black/15 bg-[var(--paper-deep)] text-[#111419] shrink-0">
                                         {index === 3 ? <Globe2 size={22} className="lg:size-[26px]" /> : <MapPin size={20} className="lg:size-[24px]" />}
                                     </span>
 
@@ -288,7 +288,7 @@ function FilterSelect({
             <select
                 value={value}
                 onChange={(event) => onChange(event.target.value)}
-                className="h-12 w-full sm:min-w-[180px] appearance-none rounded-lg border border-[#C2B2B2] bg-[#F8F4EA] px-4 pr-10 text-sm sm:text-base font-semibold text-[#111419] outline-none"
+                className="h-12 w-full sm:min-w-[180px] appearance-none rounded-lg border border-[#C2B2B2] bg-[var(--paper-deep)] px-4 pr-10 text-sm sm:text-base font-semibold text-[#111419] outline-none"
             >
                 {options.map((option) => (
                     <option key={option}>{option}</option>
@@ -319,7 +319,7 @@ function RegionalPersonCard({ person }: { person: Person }) {
 
             <div className="p-5 flex flex-col flex-1 justify-between">
                 <div>
-                    <h3 className="text-base font-bold uppercase leading-tight text-white line-clamp-1">
+                    <h3 className="font-serif text-[17px] font-medium leading-tight text-white line-clamp-1">
                         {person.name}
                     </h3>
 
@@ -346,7 +346,7 @@ function RegionalPersonCard({ person }: { person: Person }) {
 
                 <Link
                     href="/dashboard/inductees"
-                    className="mt-5 flex h-10 sm:h-[42px] w-full sm:w-[116px] items-center justify-center rounded-lg bg-[#D7263DE5] text-xs sm:text-sm font-semibold text-white transition hover:bg-[#D7263D]"
+                    className="mt-5 flex h-10 sm:h-[42px] w-full sm:w-[116px] items-center justify-center rounded-lg bg-[var(--crimson)]/90 text-xs sm:text-sm font-semibold text-white transition hover:bg-[var(--crimson)]"
                 >
                     View Profile
                 </Link>
@@ -379,8 +379,8 @@ function Pagination({
                         className={[
                             "h-11 w-11 sm:h-14 sm:w-14 rounded-md border text-sm sm:text-xl font-bold transition",
                             isActive
-                                ? "border-[#D7263D] bg-[linear-gradient(205.51deg,#FFFFFF_4.55%,#F5EBE1_38.62%)] text-[#111419]"
-                                : "border-[#E9DCD3] bg-transparent text-[#7B7B7B] hover:border-[#D7263D]",
+                                ? "border-[var(--crimson)] bg-[linear-gradient(205.51deg,#FFFFFF_4.55%,var(--paper)_38.62%)] text-[#111419]"
+                                : "border-[#E9DCD3] bg-transparent text-[#7B7B7B] hover:border-[var(--crimson)]",
                         ].join(" ")}
                     >
                         {item}
@@ -392,7 +392,7 @@ function Pagination({
                 type="button"
                 disabled={page >= totalPages}
                 onClick={() => onPageChange(Math.min(page + 1, totalPages))}
-                className="flex h-11 w-11 sm:h-14 sm:w-14 items-center justify-center rounded-md border border-[#E9DCD3] transition hover:border-[#D7263D] disabled:cursor-not-allowed disabled:opacity-40 text-[#7B7B7B]"
+                className="flex h-11 w-11 sm:h-14 sm:w-14 items-center justify-center rounded-md border border-[#E9DCD3] transition hover:border-[var(--crimson)] disabled:cursor-not-allowed disabled:opacity-40 text-[#7B7B7B]"
             >
                 <ChevronRight size={22} className="sm:size-[26px]" />
             </button>

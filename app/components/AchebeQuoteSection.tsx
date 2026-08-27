@@ -53,7 +53,7 @@ export default function AchebeQuoteSection() {
                   “
                 </motion.span>
 
-                <p className="pl-8 text-[30px] font-semibold leading-[1.4] text-white sm:pl-10 sm:leading-[1.5] lg:pl-12">
+                <p className="pl-8 font-serif text-[30px] italic font-medium leading-[1.35] text-white sm:pl-10 sm:leading-[1.45] lg:pl-12">
                   {quotePhrases.map((phrase, index) => (
                     <motion.span
                       key={phrase}

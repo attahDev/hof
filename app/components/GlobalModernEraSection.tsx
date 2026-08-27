@@ -9,6 +9,7 @@ type RegionId =
   | "uk"
   | "africa"
   | "american-caribbean"
+  | "europe"
   | "global";
 
 type GlobalFigure = {
@@ -26,6 +27,7 @@ const filters: { id: RegionId; label: string }[] = [
   { id: "africa", label: "Africa" },
   { id: "american-caribbean", label: "American & Caribbean" },
   { id: "global", label: "Global" },
+  { id: "europe", label: "Europe" },
 ];
 
 const figures: GlobalFigure[] = [
@@ -62,7 +64,7 @@ const figures: GlobalFigure[] = [
     years: "Active",
     description:
       "Seven time World Champion and advocate for diversity in global sport.",
-    image: "/home/profile/hamiltion.png",
+    image: "/home/profile/hamiltion.jfif",
     region: "uk",
   },
 ];
@@ -91,18 +93,22 @@ export default function GlobalModernEraSection() {
             </p>
           </div>
 
-          <h2 className="mt-8 text-[clamp(52px,5vw,74px)] font-bold leading-[1.05] tracking-[-0.035em] text-[#15110E]">
+          <h2 className="mt-8 font-serif text-[clamp(52px,5vw,74px)] font-medium leading-[1.05] tracking-[-0.035em] text-[#15110E]">
             Global Inspiration
           </h2>
 
-          <p className="mt-7 max-w-[820px] text-[clamp(20px,1.8vw,28px)] leading-[1.55] text-[#5B5B58]">
+          <p className="mt-7 max-w-[820px] text-[clamp(20px,1.8vw,28px)] leading-[1.55] text-[#2B3037]">
             20th 21st century influence. Illustrated portraits only, in keeping
             with an interpretive, non-photographic archive style.
           </p>
         </header>
 
-        {/* Functional filters */}
-        <div className="mt-8 flex flex-wrap gap-4">
+        {/* Region filters */}
+        <div className="mt-10 flex flex-wrap items-center gap-3 border-y border-black/10 py-5">
+          <span className="mr-1 shrink-0 font-serif text-[13px] italic text-[#96701C]">
+            Filter by
+          </span>
+
           {filters.map((filter) => {
             const isActive = activeRegion === filter.id;
 
@@ -112,10 +118,10 @@ export default function GlobalModernEraSection() {
                 type="button"
                 onClick={() => setActiveRegion(filter.id)}
                 className={[
-                  "h-[52px] rounded-lg border px-7 text-[17px] font-semibold transition",
+                  "h-[42px] rounded-full border px-6 text-[14px] font-medium uppercase tracking-[0.03em] transition",
                   isActive
-                    ? "border-[#D9B700] bg-[#D9B700] text-[#000D1C]"
-                    : "border-[#C8C1B8] bg-transparent text-[#555D68] hover:border-[#D9B700] hover:text-[#96701C]",
+                    ? "border-[#D9B700] bg-[#15110E] text-[#D9B700]"
+                    : "border-black/15 bg-transparent text-[#5B5B58] hover:border-[#D9B700]/60 hover:text-[#96701C]",
                 ].join(" ")}
               >
                 {filter.label}
@@ -124,10 +130,15 @@ export default function GlobalModernEraSection() {
           })}
         </div>
 
-        {/* Cards */}
-        <div className="mt-8 grid grid-cols-1 gap-[45px] sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {filteredFigures.map((figure) => (
-            <GlobalFigureCard key={figure.id} figure={figure} />
+        {/* Cards — masonry flow instead of a locked grid */}
+        <div className="mt-8 columns-1 gap-6 sm:columns-2 lg:columns-3 xl:columns-4">
+          {filteredFigures.map((figure, index) => (
+            <div
+              key={figure.id}
+              className={["mb-6 break-inside-avoid", index % 3 === 1 ? "sm:mt-10" : ""].join(" ")}
+            >
+              <GlobalFigureCard figure={figure} />
+            </div>
           ))}
         </div>
 
@@ -146,7 +157,7 @@ export default function GlobalModernEraSection() {
 
 function GlobalFigureCard({ figure }: { figure: GlobalFigure }) {
   return (
-    <article className="mx-auto flex h-[393px] w-full max-w-[248px] flex-col overflow-hidden rounded-lg border border-white/10 bg-[linear-gradient(205.51deg,#281C10_4.55%,#111419_38.62%)] pb-[25px]">
+    <article className="plaque-card flex w-full flex-col overflow-hidden rounded-lg bg-[linear-gradient(205.51deg,#281C10_4.55%,#111419_38.62%)] pb-[25px]">
       {/* Image */}
       <div className="relative h-[220px] w-full shrink-0 overflow-hidden">
         <Image

@@ -1,40 +1,14 @@
 "use client";
 
+import { Globe2, Loader2, MapPin, Sparkles } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Globe2, MapPin, Loader2, Sparkles } from "lucide-react";
 import { FormEvent, useState } from "react";
+import { getGmbteToken } from "../../lib/gmbteApi";
 
-const API_URL = "https://olayimika01-hall-of-fame.hf.space/api/v1/chat";
-
-type ApiResponse = {
-  answer?: string;
-  response?: string;
-  message?: string;
-  result?: string;
-  data?: {
-    answer?: string;
-    response?: string;
-    message?: string;
-  };
-};
-
-function getResponseText(data: ApiResponse | string): string {
-  if (typeof data === "string") {
-    return data;
-  }
-
-  return (
-    data.answer ||
-    data.response ||
-    data.message ||
-    data.result ||
-    data.data?.answer ||
-    data.data?.response ||
-    data.data?.message ||
-    "I received a response, but I couldn't read its format."
-  );
-}
+// Routed through backgmb (not the HF Space directly) so Pelumi's identity
+// short-circuit and personality voice-pass actually run.
+const API_URL = "https://backgmb.onrender.com/hof-ai/chat";
 
 const tributes = [
   {
@@ -49,7 +23,7 @@ const tributes = [
   {
     id: "2",
     name: "Kwame Mensah",
-    person: "Prof. Erinma Bell",
+    person: "Prof Erinma Bell MBE DL JP",
     quote: "A lifetime of service, innovation, and inspiration.",
     time: "Yesterday",
     avatar: "/hero/Container (1).png",
@@ -82,7 +56,7 @@ export default function TributesMentorSection() {
 
 function RecentTributes() {
   return (
-    <section className="h-auto min-h-[350px] flex-1 rounded-[15px] bg-[#000D1C] p-5 sm:p-[20px]">
+    <section className="h-auto min-h-[350px] flex-1 rounded-[15px] bg-[var(--ink)] p-5 sm:p-[20px]">
       <div className="flex items-center justify-between">
         <h2 className="text-[18px] sm:text-[20px] font-semibold uppercase tracking-[0.5px] text-white">
           Recent Tributes
@@ -149,15 +123,17 @@ function FellowshipAi() {
     setIsLoading(true);
 
     try {
+      const token = getGmbteToken();
       const response = await fetch(API_URL, {
         method: "POST",
         mode: "cors",
         headers: {
           "Content-Type": "application/json",
           "Accept": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
         body: JSON.stringify({
-          query: trimmedQuestion,
+          message: trimmedQuestion,
         }),
       });
 
@@ -168,7 +144,7 @@ function FellowshipAi() {
         try {
           if (contentType?.includes("application/json")) {
             const errorData = await response.json();
-            errorMessage = errorData?.detail || errorData?.message || errorData?.error || errorMessage;
+            errorMessage = errorData?.message || errorData?.error || errorMessage;
           } else {
             const errorText = await response.text();
             if (errorText) errorMessage = errorText;
@@ -179,18 +155,14 @@ function FellowshipAi() {
         throw new Error(errorMessage);
       }
 
-      if (contentType?.includes("application/json")) {
-        const data: ApiResponse = await response.json();
-        setAnswer(getResponseText(data));
-      } else {
-        const text = await response.text();
-        setAnswer(text);
-      }
+      const body = await response.json();
+      const reply = body?.data?.reply ?? body?.reply;
+      setAnswer(reply || "I received a response, but I couldn't read its format.");
     } catch (err) {
-      console.error("Fellowship AI segment error:", err);
+      console.error("Pelumi (tributes widget) error:", err);
       setError(
         err instanceof TypeError && err.message === "Failed to fetch"
-          ? "Connection failed. Please verify CORS parameters or endpoint availability."
+          ? "Couldn't reach Pelumi right now. Please try again in a moment."
           : err instanceof Error
           ? err.message
           : "An unexpected connection error occurred."
@@ -213,7 +185,7 @@ function FellowshipAi() {
     <section className="h-auto min-h-[350px] w-full lg:w-[380px] xl:w-[404px] shrink-0 rounded-[15px] bg-[#3C3300] p-5 sm:p-[20px] flex flex-col justify-between">
       <div className="flex-1 flex flex-col">
         <div className="flex items-center justify-between">
-          <h2 className="text-[18px] sm:text-[20px] font-semibold uppercase tracking-[0.5px] text-[#D9B700]">
+          <h2 className="text-[18px] sm:text-[20px] font-semibold uppercase tracking-[0.5px] text-[var(--gold)]">
             Fellowship AI
           </h2>
 
@@ -226,18 +198,18 @@ function FellowshipAi() {
         <div className="mt-4 flex-1 flex flex-col">
           {isLoading && (
             <div className="flex-1 flex flex-col items-center justify-center py-6 text-center text-[#DBD2C8]">
-              <Loader2 className="animate-spin text-[#D9B700] mb-3" size={32} />
+              <Loader2 className="animate-spin text-[var(--gold)] mb-3" size={32} />
               <p className="text-sm font-medium">Searching the Hall of Fame archive...</p>
             </div>
           )}
 
           {!isLoading && error && (
-            <div className="flex-1 rounded-lg border border-[#D7263D]/30 bg-[#D7263D]/5 p-4 my-2 overflow-y-auto max-h-[180px]">
+            <div className="flex-1 rounded-lg border border-[var(--crimson)]/30 bg-[var(--crimson)]/5 p-4 my-2 overflow-y-auto max-h-[180px]">
               <p className="text-xs font-semibold uppercase tracking-wider text-[#FF8796]">Query Error</p>
               <p className="mt-1 text-xs text-[#B8C0CC]">{error}</p>
               <button 
                 onClick={() => { setError(""); setAnswer(""); }} 
-                className="mt-3 text-[11px] font-bold uppercase text-[#D9B700] hover:underline"
+                className="mt-3 text-[11px] font-bold uppercase text-[var(--gold)] hover:underline"
               >
                 Clear Error
               </button>
@@ -245,9 +217,9 @@ function FellowshipAi() {
           )}
 
           {!isLoading && answer && (
-            <div className="flex-1 rounded-lg border border-[#D9B700]/10 bg-[#000D1C]/40 p-4 my-2 flex flex-col justify-between">
+            <div className="flex-1 rounded-lg border border-[var(--gold)]/10 bg-[var(--ink)]/40 p-4 my-2 flex flex-col justify-between">
               <div className="overflow-y-auto max-h-[150px] [scrollbar-width:thin]">
-                <div className="flex items-center gap-1 text-[#D9B700] mb-1">
+                <div className="flex items-center gap-1 text-[var(--gold)] mb-1">
                   <Sparkles size={13} />
                   <p className="text-[10px] font-bold uppercase tracking-wider">Fellowship AI Response</p>
                 </div>
@@ -256,7 +228,7 @@ function FellowshipAi() {
               </div>
               <button 
                 onClick={() => { setAnswer(""); setQuestion(""); }} 
-                className="mt-3 w-fit text-[11px] font-bold uppercase text-[#D9B700] hover:underline self-end"
+                className="mt-3 w-fit text-[11px] font-bold uppercase text-[var(--gold)] hover:underline self-end"
               >
                 Ask Another
               </button>
@@ -277,7 +249,7 @@ function FellowshipAi() {
                     key={item}
                     type="button"
                     onClick={() => handleSuggestion(item)}
-                    className="h-[35px] w-full rounded-[7px] border border-[#D9B700]/10 bg-[#D9B700]/5 px-3 text-left text-[11px] sm:text-[12px] font-light text-[#B1A393] truncate transition hover:border-[#D9B700]/30 hover:bg-[#D9B700]/10"
+                    className="h-[35px] w-full rounded-[7px] border border-[var(--gold)]/10 bg-[var(--gold)]/5 px-3 text-left text-[11px] sm:text-[12px] font-light text-[#B1A393] truncate transition hover:border-[var(--gold)]/30 hover:bg-[var(--gold)]/10"
                   >
                     "{item}"
                   </button>
@@ -289,20 +261,20 @@ function FellowshipAi() {
       </div>
 
       {/* Query input block */}
-      <form onSubmit={handleSubmit} className="mt-4 sm:mt-0 pt-4 lg:pt-0 border-t border-[#D9B700]/5 flex gap-[8px]">
+      <form onSubmit={handleSubmit} className="mt-4 sm:mt-0 pt-4 lg:pt-0 border-t border-[var(--gold)]/5 flex gap-[8px]">
         <input
           type="text"
           value={question}
           onChange={(event) => setQuestion(event.target.value)}
           disabled={isLoading}
           placeholder="Ask Fellowship AI..."
-          className="h-[37px] flex-1 rounded-[7px] border border-[#D9B700]/15 bg-[#FFFFFF0D] px-[13px] text-xs sm:text-[12px] text-[#DBD2C8] outline-none placeholder:text-[#B1A393] focus:border-[#D9B700]/40 transition-colors disabled:opacity-40"
+          className="h-[37px] flex-1 rounded-[7px] border border-[var(--gold)]/15 bg-[#FFFFFF0D] px-[13px] text-xs sm:text-[12px] text-[#DBD2C8] outline-none placeholder:text-[#B1A393] focus:border-[var(--gold)]/40 transition-colors disabled:opacity-40"
         />
 
         <button 
           type="submit"
           disabled={isLoading || !question.trim()}
-          className="h-[37px] w-[55px] rounded-[7px] bg-[#D9B700] text-xs sm:text-[13px] font-bold text-[#000D1C] transition hover:bg-[#D9B700]/90 active:scale-[0.98] disabled:opacity-40"
+          className="h-[37px] w-[55px] rounded-[7px] bg-[var(--gold)] text-xs sm:text-[13px] font-bold text-[var(--ink)] transition hover:bg-[var(--gold)]/90 active:scale-[0.98] disabled:opacity-40"
         >
           {isLoading ? <Loader2 size={15} className="animate-spin mx-auto" /> : "Ask"}
         </button>

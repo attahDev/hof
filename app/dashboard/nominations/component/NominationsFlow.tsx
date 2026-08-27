@@ -273,7 +273,7 @@ export default function NominationsFlow() {
       className="
         min-h-screen
         w-full
-        bg-[#F5EBE1]
+        bg-[var(--paper)]
         px-4
         py-6
         sm:px-6
@@ -299,7 +299,7 @@ export default function NominationsFlow() {
               font-bold
               uppercase
               leading-none
-              text-[#000D1C]
+              text-[var(--ink)]
               sm:text-[36px]
               lg:text-[40px]
             "
@@ -356,7 +356,7 @@ export default function NominationsFlow() {
               <div
                 className="
                   rounded-[15px]
-                  bg-[#000D1C]
+                  bg-[var(--ink)]
                   p-4
                   sm:p-5
                 "
@@ -378,7 +378,7 @@ export default function NominationsFlow() {
                     className="
                       h-full
                       rounded-full
-                      bg-[#D9B700]
+                      bg-[var(--gold)]
                       transition-all
                       duration-300
                     "
@@ -563,8 +563,8 @@ function PreviewBanner() {
         gap-3
         rounded-xl
         border
-        border-[#D9B700]/25
-        bg-[#D9B700]/10
+        border-[var(--gold)]/25
+        bg-[var(--gold)]/10
         p-4
       "
     >
@@ -577,8 +577,8 @@ function PreviewBanner() {
           items-center
           justify-center
           rounded-full
-          bg-[#D9B700]/20
-          text-[#D9B700]
+          bg-[var(--gold)]/20
+          text-[var(--gold)]
         "
       >
         <Award size={20} />
@@ -586,7 +586,7 @@ function PreviewBanner() {
 
       <div>
         <div className="flex flex-wrap items-center gap-2">
-          <p className="text-[13px] font-bold text-[#D9B700] sm:text-[14px]">
+          <p className="text-[13px] font-bold text-[var(--gold)] sm:text-[14px]">
             Nominations Opening Soon
           </p>
 
@@ -830,7 +830,7 @@ function StepTwo({
           gap-3
           rounded-md
           border
-          border-[#D9B700]/30
+          border-[var(--gold)]/30
           bg-[#1D2A17]
           px-4
           py-3
@@ -841,7 +841,7 @@ function StepTwo({
           className="
             mt-0.5
             shrink-0
-            text-[#D9B700]
+            text-[var(--gold)]
           "
         />
 
@@ -869,7 +869,7 @@ function StepTwo({
             <span
               className="
                 font-bold
-                text-[#D9B700]
+                text-[var(--gold)]
               "
             >
               {fee}
@@ -952,8 +952,8 @@ function StepThree({
                   `,
 
                   isActive
-                    ? "border-[#D9B700] bg-[#2E2E14] text-white"
-                    : "border-[#FFFFFF33] text-white hover:border-[#D9B700]",
+                    ? "border-[var(--gold)] bg-[#2E2E14] text-white"
+                    : "border-[#FFFFFF33] text-white hover:border-[var(--gold)]",
                 ].join(" ")}
               >
                 {level}
@@ -1140,7 +1140,7 @@ function StepFive() {
                   text-center
                   text-white
                   transition
-                  hover:border-[#D9B700]
+                  hover:border-[var(--gold)]
                   hover:bg-white/[0.02]
                 "
               >
@@ -1459,7 +1459,7 @@ function StepEight({
                     `,
 
                     isChecked
-                      ? "border-[#D9B700] bg-[#D9B700] text-[#000D1C]"
+                      ? "border-[var(--gold)] bg-[var(--gold)] text-[var(--ink)]"
                       : "border-[#FFFFFF66]",
                   ].join(" ")}
                 >
@@ -1523,8 +1523,8 @@ function StepNine({
           className="
             rounded-lg
             border
-            border-[#D9B700]/30
-            bg-[#D9B700]/10
+            border-[var(--gold)]/30
+            bg-[var(--gold)]/10
             p-4
           "
         >
@@ -1544,8 +1544,8 @@ function StepNine({
                 items-center
                 justify-center
                 rounded-full
-                bg-[#D9B700]/20
-                text-[#D9B700]
+                bg-[var(--gold)]/20
+                text-[var(--gold)]
               "
             >
               <Star size={17} />
@@ -1680,7 +1680,7 @@ function StepNine({
             gap-4
             rounded-lg
             border
-            border-[#D9B700]/30
+            border-[var(--gold)]/30
             bg-[#1D2A17]
             p-4
             sm:flex-row
@@ -1728,7 +1728,7 @@ function StepNine({
             className="
               text-[24px]
               font-bold
-              text-[#D9B700]
+              text-[var(--gold)]
             "
           >
             {fee}
@@ -1799,7 +1799,7 @@ function StepNine({
             className="
               mt-0.5
               shrink-0
-              text-[#D9B700]
+              text-[var(--gold)]
             "
           />
 
@@ -1836,7 +1836,7 @@ function StepNine({
           gap-4
           rounded-md
           border
-          border-[#D9B700]/30
+          border-[var(--gold)]/30
           bg-[#1D2A17]
           p-3
         "
@@ -1866,7 +1866,7 @@ function StepNine({
           className="
             text-[22px]
             font-bold
-            text-[#D9B700]
+            text-[var(--gold)]
           "
         >
           {fee}
@@ -2022,7 +2022,7 @@ function FooterButtons({
   return (
     <>
       {submitError && (
-        <p className="mt-4 text-[13px] font-semibold text-[#D7263D]">
+        <p className="mt-4 text-[13px] font-semibold text-[var(--crimson)]">
           {submitError}
         </p>
       )}
@@ -2053,13 +2053,13 @@ function FooterButtons({
             h-[43px]
             rounded-md
             border
-            border-[#D9B700]
+            border-[var(--gold)]
             px-5
             text-[14px]
             font-bold
             text-white
             transition
-            hover:bg-[#D9B700]/10
+            hover:bg-[var(--gold)]/10
             disabled:cursor-not-allowed
             disabled:opacity-40
           "
@@ -2088,8 +2088,8 @@ function FooterButtons({
 
             !NOMINATIONS_ARE_LIVE &&
             isFinalStep
-              ? "bg-[#D9B700] text-[#000D1C] hover:bg-[#E4C500]"
-              : "bg-[#D7263D] text-white hover:bg-[#BE1F35]",
+              ? "bg-[var(--gold)] text-[var(--ink)] hover:bg-[#E4C500]"
+              : "bg-[var(--crimson)] text-white hover:bg-[var(--crimson-deep)]",
           ].join(" ")}
         >
           {isFinalStep && submitting
@@ -2263,7 +2263,7 @@ function RecentNominations({
                   `,
 
                   isActive
-                    ? "border-[#D9B700] bg-[#D9B700] text-[#000D1C]"
+                    ? "border-[var(--gold)] bg-[var(--gold)] text-[var(--ink)]"
                     : "border-[#FFFFFF24] text-[#B1A393]",
                 ].join(" ")}
               >
@@ -2384,12 +2384,12 @@ function RecentNominations({
                       <span
                         className="
                           rounded-full
-                          bg-[#D9B700]
+                          bg-[var(--gold)]
                           px-3
                           py-1
                           text-[9px]
                           font-bold
-                          text-[#000D1C]
+                          text-[var(--ink)]
                           sm:text-[10px]
                         "
                       >
@@ -2468,7 +2468,7 @@ function PreviewCompletedCard({
         justify-center
         overflow-hidden
         rounded-[15px]
-        bg-[#000D1C]
+        bg-[var(--ink)]
         p-6
         text-center
         sm:p-8
@@ -2494,7 +2494,7 @@ function PreviewCompletedCard({
           h-[240px]
           w-[240px]
           rounded-full
-          bg-[#D9B700]/10
+          bg-[var(--gold)]/10
           blur-[80px]
         "
       />
@@ -2517,10 +2517,10 @@ function PreviewCompletedCard({
             items-center
             justify-center
             rounded-full
-            bg-[#D9B700]/15
-            text-[#D9B700]
+            bg-[var(--gold)]/15
+            text-[var(--gold)]
             ring-8
-            ring-[#D9B700]/10
+            ring-[var(--gold)]/10
           "
         >
           <Award
@@ -2536,7 +2536,7 @@ function PreviewCompletedCard({
             font-bold
             uppercase
             tracking-[0.15em]
-            text-[#D9B700]
+            text-[var(--gold)]
           "
         >
           Preview Complete
@@ -2581,8 +2581,8 @@ function PreviewCompletedCard({
             mt-5
             rounded-lg
             border
-            border-[#D9B700]/20
-            bg-[#D9B700]/10
+            border-[var(--gold)]/20
+            bg-[var(--gold)]/10
             px-4
             py-3
           "
@@ -2591,7 +2591,7 @@ function PreviewCompletedCard({
             className="
               text-[11px]
               leading-[18px]
-              text-[#D9B700]
+              text-[var(--gold)]
             "
           >
             ✨ Nominations are opening
@@ -2611,13 +2611,13 @@ function PreviewCompletedCard({
             items-center
             gap-3
             rounded-md
-            bg-[#D7263D]
+            bg-[var(--crimson)]
             px-5
             text-[14px]
             font-bold
             text-white
             transition
-            hover:bg-[#BE1F35]
+            hover:bg-[var(--crimson-deep)]
           "
         >
           Explore Another Nomination
@@ -2650,7 +2650,7 @@ function SubmittedCard({
         justify-center
         overflow-hidden
         rounded-[15px]
-        bg-[#000D1C]
+        bg-[var(--ink)]
         p-6
         text-center
       "
@@ -2686,7 +2686,7 @@ function SubmittedCard({
             justify-center
             rounded-full
             bg-[#DBD2C8]
-            text-[#000D1C]
+            text-[var(--ink)]
             shadow-[0_0_0_8px_#9B8B3B]
           "
         >
@@ -2737,7 +2737,7 @@ function SubmittedCard({
             items-center
             gap-3
             rounded-md
-            bg-[#D7263D]
+            bg-[var(--crimson)]
             px-5
             text-[14px]
             font-bold
@@ -2824,10 +2824,10 @@ function PreviewStep({
           items-center
           justify-center
           rounded-full
-          bg-[#D9B700]/15
+          bg-[var(--gold)]/15
           text-[11px]
           font-bold
-          text-[#D9B700]
+          text-[var(--gold)]
         "
       >
         {number}
@@ -2958,7 +2958,7 @@ function Input({
           outline-none
           transition
           placeholder:text-[#8E98A3]
-          focus:border-[#D9B700]
+          focus:border-[var(--gold)]
         "
       />
     </label>
@@ -3023,7 +3023,7 @@ function Textarea({
           outline-none
           transition
           placeholder:text-[#8E98A3]
-          focus:border-[#D9B700]
+          focus:border-[var(--gold)]
         "
       />
     </label>
@@ -3236,7 +3236,7 @@ function CheckRow({
           `,
 
           checked
-            ? "border-[#D9B700] bg-[#D9B700] text-[#000D1C]"
+            ? "border-[var(--gold)] bg-[var(--gold)] text-[var(--ink)]"
             : "border-[#FFFFFF66]",
         ].join(" ")}
       >

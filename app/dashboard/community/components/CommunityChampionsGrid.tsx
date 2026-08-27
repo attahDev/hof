@@ -279,7 +279,7 @@ export default function CommunityChampionsGrid() {
               outline-none
               transition
               placeholder:text-[#6B7280]
-              focus:border-[#D7263D]
+              focus:border-[var(--crimson)]
             "
           />
         </div>
@@ -371,16 +371,16 @@ export default function CommunityChampionsGrid() {
               gap-2
               rounded-md
               border
-              border-[#D7263D]
-              bg-[linear-gradient(205.51deg,#FFFFFF_4.55%,#F5EBE1_38.62%)]
+              border-[var(--crimson)]
+              bg-[linear-gradient(205.51deg,#FFFFFF_4.55%,var(--paper)_38.62%)]
               px-8
               text-base
               font-bold
               uppercase
-              text-[#000D1C]
+              text-[var(--ink)]
               transition-all
               duration-200
-              hover:bg-[#D7263D]
+              hover:bg-[var(--crimson)]
               hover:text-white
               sm:text-lg
             "
@@ -428,7 +428,7 @@ function FilterSelect({
           rounded-lg
           border
           border-[#C2B2B2]
-          bg-[#F8F4EA]
+          bg-[var(--paper-deep)]
           px-4
           pr-10
           text-sm
@@ -436,7 +436,7 @@ function FilterSelect({
           text-[#111419]
           outline-none
           transition
-          focus:border-[#D7263D]
+          focus:border-[var(--crimson)]
           xl:min-w-[180px]
         "
       >
@@ -519,7 +519,7 @@ function ChampionCard({
           TEXT CONTENT
       ========================================== */}
       <div className="relative flex min-h-0 flex-1 flex-col px-5 pb-5 sm:px-6">
-        <h3 className="-mt-[16px] relative z-20 text-[20px] sm:text-[22px] lg:text-[23px] font-bold uppercase leading-snug tracking-tight text-white">
+        <h3 className="-mt-[16px] relative z-20 font-serif text-[22px] sm:text-[25px] lg:text-[26px] font-medium leading-snug text-white">
           {champion.name}
         </h3>
 

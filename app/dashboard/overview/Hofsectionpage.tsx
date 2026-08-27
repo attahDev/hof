@@ -82,7 +82,7 @@ export default function HallOfFamePageSection() {
 
 function CategoryCardItem({ card }: { card: CategoryCard }) {
   return (
-    <article className="group relative flex h-[330px] sm:h-[315px] w-full flex-col overflow-hidden rounded-[15px] bg-[#000D1C] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+    <article className="group relative flex h-[330px] sm:h-[315px] w-full flex-col overflow-hidden rounded-[15px] bg-[var(--ink)] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
       <Image
         src={card.image}
         alt={card.subtitle}
@@ -93,20 +93,20 @@ function CategoryCardItem({ card }: { card: CategoryCard }) {
       />
 
       {/* Primary semi-transparent overlay to ensure readability */}
-      <div className="absolute inset-0 bg-[#000D1C]/45 transition-opacity duration-300 group-hover:bg-[#000D1C]/35" />
+      <div className="absolute inset-0 bg-[var(--ink)]/45 transition-opacity duration-300 group-hover:bg-[var(--ink)]/35" />
 
       {card.hasGradient && (
         <div
           className="absolute inset-0 z-[1]"
           style={{
             background:
-              "linear-gradient(180deg, rgba(0, 13, 28, 0) 0%, #000D1C 100%)",
+              "linear-gradient(180deg, rgba(0, 13, 28, 0) 0%, var(--ink) 100%)",
           }}
         />
       )}
 
       {/* Gradient fade overlay from bottom for all cards to guarantee text readability */}
-      <div className="absolute inset-0 z-[1] bg-gradient-to-t from-[#000D1C]/90 via-[#000D1C]/50 to-transparent" />
+      <div className="absolute inset-0 z-[1] bg-gradient-to-t from-[var(--ink)]/90 via-[var(--ink)]/50 to-transparent" />
 
       <div className="relative z-10 flex h-full flex-col px-[20px] pb-[20px] pt-[18px] sm:px-[22px] sm:pb-[22px] sm:pt-[20px]">
         <h2 className="text-[19px] sm:text-[21px] font-semibold uppercase leading-snug tracking-[0.4px] text-white">
@@ -123,7 +123,7 @@ function CategoryCardItem({ card }: { card: CategoryCard }) {
 
         <Link
           href={card.href}
-          className="mt-auto flex h-[42px] sm:h-[45px] w-[130px] sm:w-[140px] items-center justify-center gap-[10px] sm:gap-[14px] rounded-[8px] bg-[#D7263D] text-[13px] sm:text-[14px] font-semibold text-white transition-all duration-200 hover:bg-[#D7263D]/90 active:scale-[0.98]"
+          className="mt-auto flex h-[42px] sm:h-[45px] w-[130px] sm:w-[140px] items-center justify-center gap-[10px] sm:gap-[14px] rounded-[8px] bg-[var(--crimson)] text-[13px] sm:text-[14px] font-semibold text-white transition-all duration-200 hover:bg-[var(--crimson)]/90 active:scale-[0.98]"
         >
           Explore
           <ArrowRight size={17} strokeWidth={2.4} className="transition-transform duration-200 group-hover:translate-x-1" />

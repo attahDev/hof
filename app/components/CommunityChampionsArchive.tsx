@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import { ChevronDown } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import ScrollReveal from "./animations/ScrollReveal";
 
 type Champion = {
@@ -59,8 +59,7 @@ const champions: Champion[] = [
     category: "Community Leadership",
     image: "/events/Image (3).png",
     year: "2026",
-    quote:
-      "True leadership is lifting others as you rise.",
+    quote: "True leadership is lifting others as you rise.",
   },
   {
     id: "lewis-adeniregun",
@@ -73,8 +72,7 @@ const champions: Champion[] = [
     category: "Local Business Support",
     image: "/events/Container (3).png",
     year: "2026",
-    quote:
-      "When local businesses thrive, the whole community rises with them.",
+    quote: "When local businesses thrive, the whole community rises with them.",
   },
   {
     id: "carol-ann-whitehead",
@@ -87,8 +85,7 @@ const champions: Champion[] = [
     category: "Lifetime Achievement",
     image: "/events/Image (4).png",
     year: "2026",
-    quote:
-      "A life of service is the greatest legacy we can leave.",
+    quote: "A life of service is the greatest legacy we can leave.",
   },
   {
     id: "ngozi-weller",
@@ -101,8 +98,7 @@ const champions: Champion[] = [
     category: "Health & Social Impact",
     image: "/events/Image (5).png",
     year: "2026",
-    quote:
-      "Wellbeing is the foundation on which every community thrives.",
+    quote: "Wellbeing is the foundation on which every community thrives.",
   },
   {
     id: "mary-temiloluwa-ogunrewo",
@@ -115,8 +111,7 @@ const champions: Champion[] = [
     category: "Emerging Tech Talent",
     image: "/events/Image (6).png",
     year: "2026",
-    quote:
-      "Innovation begins when we dare to build what doesn't exist yet.",
+    quote: "Innovation begins when we dare to build what doesn't exist yet.",
   },
   {
     id: "daniel-jimoh",
@@ -129,8 +124,7 @@ const champions: Champion[] = [
     category: "Student Excellence Data & AI",
     image: "/events/Image (7).png",
     year: "2026",
-    quote:
-      "Data and AI are powerful when they serve people and communities.",
+    quote: "Data and AI are powerful when they serve people and communities.",
   },
   {
     id: "donna-sergeant",
@@ -143,8 +137,7 @@ const champions: Champion[] = [
     category: "Heritage Advocacy & Social Impact",
     image: "/events/Image (8).png",
     year: "2026",
-    quote:
-      "Preserving heritage is how we honour the past and empower the future.",
+    quote: "Preserving heritage is how we honour the past and empower the future.",
   },
   {
     id: "leone-shaw-brown-heritage",
@@ -157,8 +150,7 @@ const champions: Champion[] = [
     category: "Heritage & Justice Advocacy",
     image: "/events/Image (8).png",
     year: "2026",
-    quote:
-      "Justice and heritage walk hand in hand — both demand we remember and act.",
+    quote: "Justice and heritage walk hand in hand — both demand we remember and act.",
   },
   {
     id: "paul-obinna",
@@ -171,12 +163,11 @@ const champions: Champion[] = [
     category: "Cultural Innovation & Digital Engagement",
     image: "/events/Image (9).png",
     year: "2026",
-    quote:
-      "Culture thrives when we innovate how we share it with the world.",
+    quote: "Culture thrives when we innovate how we share it with the world.",
   },
   {
     id: "leone-shaw-brown-global",
-    name: "Veronica Owusu",
+    name: "Leone Shaw-Brown",
     award: "GMBTE AFRICA4U GLOBAL CHANGE MAKER AWARD",
     description:
       "Recognized for creating transformative impact and driving positive change on a global scale through leadership, innovation, and vision.",
@@ -185,8 +176,7 @@ const champions: Champion[] = [
     category: "Global Change Maker",
     image: "/events/Image (10).png",
     year: "2026",
-    quote:
-      "Global change starts with courage in our own communities.",
+    quote: "Global change starts with courage in our own communities.",
   },
   {
     id: "lisa-rees-odonnell",
@@ -199,8 +189,7 @@ const champions: Champion[] = [
     category: "Ally Champion",
     image: "/events/Image (12).png",
     year: "2026",
-    quote:
-      "Allyship means showing up — consistently, courageously, and without ego.",
+    quote: "Allyship means showing up — consistently, courageously, and without ego.",
   },
 ];
 
@@ -226,7 +215,7 @@ export default function CommunityChampionsArchive() {
       <div className="relative z-10 mx-auto w-full max-w-[1440px]">
         {/* Header */}
         <ScrollReveal as="header" className="max-w-[900px]">
-          <div className="flex items-center gap-3 text-[#D9B700]">
+          <div className="flex items-center gap-3 text-[var(--gold)]">
             <span className="font-serif text-[26px] italic leading-none">
               VI.
             </span>
@@ -236,7 +225,7 @@ export default function CommunityChampionsArchive() {
             </p>
           </div>
 
-          <h2 className="mt-7 text-[clamp(42px,4.8vw,66px)] font-bold leading-none tracking-[-0.03em] text-white">
+          <h2 className="mt-7 font-serif text-[clamp(42px,4.8vw,66px)] font-medium leading-none tracking-[-0.03em] text-white">
             Community Champions
           </h2>
 
@@ -247,23 +236,16 @@ export default function CommunityChampionsArchive() {
           </p>
         </ScrollReveal>
 
-        {/* Cards */}
-        <div className="mt-16 flex flex-col gap-8">
-          {champions.map((champion, index) => (
-            <ScrollReveal key={champion.id} delay={Math.min(index * 0.06, 0.3)}>
-              <ChampionCard
-                champion={champion}
-                imageOnLeft={index % 2 === 0}
-              />
-            </ScrollReveal>
-          ))}
-        </div>
+        {/* The book */}
+        <ScrollReveal delay={0.1}>
+          <ChampionsBook />
+        </ScrollReveal>
 
         {/* CTA */}
         <div className="mt-14 flex justify-center">
           <Link
             href="/dashboard/nominations"
-            className="inline-flex h-[52px] items-center justify-center gap-2 rounded-lg bg-[#D9B700] px-7 text-[17px] font-semibold text-[#000D1C] transition hover:bg-[#E4C300]"
+            className="inline-flex h-[52px] items-center justify-center gap-2 rounded-lg bg-[var(--gold)] px-7 text-[17px] font-semibold text-[#000D1C] transition hover:bg-[#E4C300]"
           >
             Nominate a Changemaker
             <span aria-hidden="true">↓</span>
@@ -274,142 +256,222 @@ export default function CommunityChampionsArchive() {
   );
 }
 
-function ChampionCard({
-  champion,
-  imageOnLeft,
-}: {
-  champion: Champion;
-  imageOnLeft: boolean;
-}) {
-  const [expanded, setExpanded] = useState(false);
+const romanNumerals = [
+  "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV",
+];
+
+function ChampionsBook() {
+  const [index, setIndex] = useState(0);
+  const [direction, setDirection] = useState(1);
+  const reduceMotion = useReducedMotion();
+  const total = champions.length;
+  const champion = champions[index];
+
+  const turnTo = (nextIndex: number, dir: 1 | -1) => {
+    setDirection(dir);
+    setIndex(((nextIndex % total) + total) % total);
+  };
+
+  useEffect(() => {
+    function handleKey(event: KeyboardEvent) {
+      if (event.key === "ArrowRight") turnTo(index + 1, 1);
+      if (event.key === "ArrowLeft") turnTo(index - 1, -1);
+    }
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [index]);
+
+  const pageTransition = reduceMotion
+    ? { duration: 0 }
+    : { duration: 0.55, ease: [0.65, 0, 0.35, 1] as const };
+
+  const photoVariants = {
+    enter: { opacity: 0 },
+    center: { opacity: 1 },
+    exit: { opacity: 0 },
+  };
+
+  // The leaf pivots on the spine (its left edge) like an actual page
+  // turning over, rather than just cross-fading.
+  const leafVariants = {
+    enter: (dir: number) => ({
+      rotateY: dir > 0 ? 128 : -128,
+      opacity: 0.35,
+    }),
+    center: { rotateY: 0, opacity: 1 },
+    exit: (dir: number) => ({
+      rotateY: dir > 0 ? -128 : 128,
+      opacity: 0.35,
+    }),
+  };
 
   return (
-    <article
-      className="
-        relative grid w-full overflow-hidden
-        rounded-[16px]
-        border border-[#D9B700]/15
-        bg-[linear-gradient(230.34deg,#281C10_6.93%,#111419_64.47%)]
-        shadow-[0_10px_15px_-3px_rgba(0,0,0,0.10),0_4px_6px_-4px_rgba(0,0,0,0.10)]
-        lg:min-h-[750px]
-        lg:grid-cols-2
-      "
-    >
-      {/* Ribbon stays on content side */}
-      <YearRibbon
-        year={champion.year}
-        side={imageOnLeft ? "right" : "left"}
-      />
-
-      {/* Image */}
+    <div className="mt-16 w-full">
       <div
-        className={[
-          "relative min-h-[400px] overflow-hidden lg:min-h-0 lg:h-full",
-          imageOnLeft ? "lg:order-1" : "lg:order-2",
-        ].join(" ")}
+        className="relative mx-auto w-full max-w-[1160px] overflow-hidden rounded-[6px] border border-[var(--gold)]/20 bg-[#0B0E13] shadow-[0_40px_80px_-30px_rgba(0,0,0,0.7)]"
+        style={{ perspective: 2200 }}
       >
-        <Image
-          src={champion.image}
-          alt={champion.name}
-          fill
-          sizes="(max-width: 1024px) 100vw, 670px"
-          className="object-cover object-center"
-        />
+        {/* Spine shadow between the two pages */}
+        <div className="pointer-events-none absolute inset-y-0 left-1/2 z-20 hidden w-20 -translate-x-1/2 bg-[linear-gradient(90deg,transparent_0%,rgba(0,0,0,0.4)_50%,transparent_100%)] lg:block" />
+        <div className="pointer-events-none absolute inset-y-0 left-1/2 z-20 hidden w-px -translate-x-1/2 bg-[var(--gold)]/15 lg:block" />
 
-        <div
-          className={[
-            "pointer-events-none absolute inset-0 hidden lg:block",
-            imageOnLeft
-              ? "bg-gradient-to-r from-transparent via-transparent to-[#111419]/20"
-              : "bg-gradient-to-l from-transparent via-transparent to-[#111419]/20",
-          ].join(" ")}
-        />
-      </div>
-
-      {/* Content */}
-      <div
-        className={[
-          "relative flex flex-col justify-center px-8 py-12 sm:px-10 lg:px-12 xl:px-[45px]",
-          imageOnLeft ? "lg:order-2" : "lg:order-1",
-        ].join(" ")}
-      >
-        <div className="max-w-[510px]">
-          <p className="text-[17px] font-bold uppercase leading-[1.35] text-[#BFB2A3]">
-            {champion.award}
-          </p>
-
-          <h3 className="mt-8 text-[clamp(28px,2.4vw,38px)] font-bold leading-[1.05] text-white">
-            {champion.name}
-          </h3>
-
-          <p className="mt-4 text-[15px] leading-[1.5] text-[#A9A39E]">
-            {champion.description}
-          </p>
-
-          <p className="mt-5 text-[12px] font-medium text-[#BFB2A3]">
-            {champion.category}
-          </p>
-
-          <button
-            type="button"
-            onClick={() => setExpanded((prev) => !prev)}
-            aria-expanded={expanded}
-            className="mt-7 inline-flex items-center gap-2 text-[13px] font-semibold text-[#D9B700] transition hover:text-[#F0CE00]"
+        <div className="grid min-h-[560px] w-full lg:grid-cols-2">
+          {/* Left page — the photograph plate */}
+          <div
+            className="relative overflow-hidden bg-[#05070a]"
+            style={{ transformStyle: "preserve-3d" }}
           >
-            Read full story
-            <ChevronDown
-              size={14}
-              strokeWidth={2}
-              className={`transition-transform duration-300 ${
-                expanded ? "rotate-180" : ""
-              }`}
-            />
-          </button>
-
-          <AnimatePresence initial={false}>
-            {expanded && (
+            <AnimatePresence mode="wait" custom={direction} initial={false}>
               <motion.div
-                key="story"
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.35, ease: "easeInOut" }}
-                className="overflow-hidden"
+                key={`photo-${champion.id}`}
+                custom={direction}
+                variants={photoVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={pageTransition}
+                className="absolute inset-0"
               >
-                <p className="mt-6 text-[15px] leading-[1.6] text-[#E8E1DA]">
+                <Image
+                  src={champion.image}
+                  alt={champion.name}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 580px"
+                  className="object-cover object-center"
+                  priority={index === 0}
+                />
+                <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(0deg,rgba(0,0,0,0.35)_0%,transparent_35%)]" />
+                <YearRibbon year={champion.year} />
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Right page — the printed leaf, hinged on the spine */}
+          <div
+            className="relative min-h-[400px] overflow-hidden bg-[var(--paper)]"
+            style={{ perspective: 2200 }}
+          >
+            <AnimatePresence mode="sync" custom={direction} initial={false}>
+              <motion.div
+                key={`leaf-${champion.id}`}
+                custom={direction}
+                variants={leafVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={pageTransition}
+                className="absolute inset-0 flex flex-col justify-center overflow-y-auto bg-[var(--paper)] px-8 py-12 sm:px-10 lg:px-12 xl:px-[52px]"
+                style={{
+                  transformOrigin: "left center",
+                  backfaceVisibility: "hidden",
+                  WebkitBackfaceVisibility: "hidden",
+                }}
+              >
+                {/* Shading that sweeps across the leaf as it turns, like
+                    light catching a real page mid-flip */}
+                <motion.div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.35)_0%,transparent_45%)]"
+                  variants={{
+                    enter: { opacity: 1 },
+                    center: { opacity: 0 },
+                    exit: { opacity: 1 },
+                  }}
+                  transition={pageTransition}
+                />
+
+                <p className="font-serif text-[15px] italic tracking-[0.02em] text-[var(--gold-deep)]">
+                  Plate {romanNumerals[index] ?? index + 1}
+                </p>
+
+                <p className="mt-4 text-[13px] font-bold uppercase leading-[1.4] tracking-[0.02em] text-[var(--gold-dim)]">
+                  {champion.award}
+                </p>
+
+                <h3 className="mt-5 font-serif text-[clamp(28px,2.6vw,40px)] font-medium leading-[1.1] text-[var(--ink)]">
+                  {champion.name}
+                </h3>
+
+                <p className="mt-4 text-[15px] leading-[1.6] text-[var(--ink-soft)]">
+                  {champion.description}
+                </p>
+
+                <p className="mt-4 text-[15px] leading-[1.6] text-[var(--ink-soft)]">
                   {champion.story}
                 </p>
 
                 {champion.quote && (
-                  <blockquote className="mt-6 rounded-md border-l-[3px] border-[#D9B700] bg-[#D9B700]/[0.06] px-5 py-4 text-[13px] italic leading-[1.5] text-[#E8E1DA]">
+                  <blockquote className="mt-6 border-l-2 border-[var(--gold-deep)]/50 pl-5 font-serif text-[15px] italic leading-[1.55] text-[var(--ink)]">
                     “{champion.quote}”
                   </blockquote>
                 )}
+
+                <p className="mt-6 text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--gold-dim)]/70">
+                  {champion.category}
+                </p>
               </motion.div>
-            )}
-          </AnimatePresence>
+            </AnimatePresence>
+          </div>
+        </div>
+
+        {/* Page-turn controls */}
+        <div className="relative z-30 flex items-center justify-center gap-6 border-t border-[var(--gold)]/15 bg-[#05070a] py-5">
+          <button
+            type="button"
+            onClick={() => turnTo(index - 1, -1)}
+            aria-label="Previous entry"
+            className="flex size-10 items-center justify-center rounded-full border border-[var(--gold)]/30 text-[var(--gold)] transition hover:border-[var(--gold)]/60 hover:bg-[var(--gold)]/10"
+          >
+            <ChevronLeft size={18} strokeWidth={1.75} />
+          </button>
+
+          <p className="font-serif text-[14px] italic tracking-[0.04em] text-[#DBD2C8]">
+            {String(index + 1).padStart(2, "0")}
+            <span className="mx-1.5 text-[#DBD2C8]/40">/</span>
+            {String(total).padStart(2, "0")}
+          </p>
+
+          <button
+            type="button"
+            onClick={() => turnTo(index + 1, 1)}
+            aria-label="Next entry"
+            className="flex size-10 items-center justify-center rounded-full border border-[var(--gold)]/30 text-[var(--gold)] transition hover:border-[var(--gold)]/60 hover:bg-[var(--gold)]/10"
+          >
+            <ChevronRight size={18} strokeWidth={1.75} />
+          </button>
         </div>
       </div>
-    </article>
+
+      {/* Jump-to-entry index, styled like a table of contents */}
+      <div className="mx-auto mt-6 flex max-w-[1160px] flex-wrap justify-center gap-2">
+        {champions.map((c, i) => (
+          <button
+            key={c.id}
+            type="button"
+            onClick={() => turnTo(i, i > index ? 1 : -1)}
+            aria-label={`Go to ${c.name}`}
+            aria-current={i === index}
+            className={[
+              "size-[7px] rounded-full transition-all duration-300",
+              i === index
+                ? "w-5 bg-[var(--gold)]"
+                : "bg-[var(--gold)]/25 hover:bg-[var(--gold)]/50",
+            ].join(" ")}
+          />
+        ))}
+      </div>
+    </div>
   );
 }
 
 type YearRibbonProps = {
   year: string;
-  side?: "left" | "right";
 };
 
-function YearRibbon({
-  year,
-  side = "right",
-}: YearRibbonProps) {
+function YearRibbon({ year }: YearRibbonProps) {
   return (
-    <div
-      className={[
-        "absolute top-0 z-20",
-        side === "right" ? "right-6" : "left-6",
-      ].join(" ")}
-    >
+    <div className="absolute right-6 top-0 z-20">
       <svg
         width="58"
         height="70"
@@ -417,10 +479,7 @@ function YearRibbon({
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
       >
-        <path
-          d="M0 -10H58V70L29 48.6441L0 70V-10Z"
-          fill="#D7263D"
-        />
+        <path d="M0 -10H58V70L29 48.6441L0 70V-10Z" fill="#D7263D" />
 
         <text
           x="29"

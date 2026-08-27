@@ -157,8 +157,8 @@ export default function InducteesGrid() {
                             className={[
                                 "h-11 sm:h-12 shrink-0 rounded-lg border px-5 sm:px-6 text-xs sm:text-sm font-semibold transition whitespace-nowrap",
                                 isActive
-                                    ? "border-[#D9B700] bg-[#D9B700] text-[#000D1C]"
-                                    : "border-[#C2B2B2] text-[#4B5563] hover:border-[#D9B700]",
+                                    ? "border-[var(--gold)] bg-[var(--gold)] text-[var(--ink)]"
+                                    : "border-[#C2B2B2] text-[#4B5563] hover:border-[var(--gold)]",
                             ].join(" ")}
                         >
                             {filter.label}
@@ -200,7 +200,7 @@ function FeaturedInductee({ item }: { item: Inductee }) {
             <div className="relative md:absolute md:-left-[20px] md:-top-5 h-[300px] md:h-[440px] w-full md:w-[302px] shrink-0 overflow-hidden rounded-lg md:rounded-none">
                 <Image
                     src="/hero/Button (1).png"
-                    alt="Prof Erinma Bell"
+                    alt="Prof Erinma Bell MBE DL JP"
                     fill
                     priority
                     sizes="(max-width: 768px) 100vw, 302px"
@@ -210,15 +210,15 @@ function FeaturedInductee({ item }: { item: Inductee }) {
 
             {/* Content Box */}
             <div className="relative z-10 flex flex-col gap-4 mt-6 md:mt-0 md:absolute md:left-[320px] lg:left-[350px] md:top-[25px] md:bottom-[25px] md:right-6 lg:w-auto max-w-full">
-                <span className="w-fit border border-white/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[4px] text-[#D9B700]">
+                <span className="w-fit border border-white/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[4px] text-[var(--gold)]">
                     Featured Inductee · 2026
                 </span>
 
                 <div>
-                    <h2 className="text-[18px] sm:text-[20px] font-bold uppercase leading-snug text-white flex flex-col sm:flex-row sm:items-center">
-                        PROF ERINMA BELL MBE DL{" "}
-                        <span className="hidden sm:inline mx-3 text-[#B1A393]">•</span>
-                        <span className="mt-1 sm:mt-0 font-light normal-case text-xs sm:text-[14px] text-[#B1A393]">
+                    <h2 className="font-serif text-[22px] sm:text-[26px] font-medium leading-snug text-white flex flex-col sm:flex-row sm:items-center">
+                        Prof Erinma Bell MBE DL JP{" "}
+                        <span className="hidden sm:inline mx-3 font-sans text-[#B1A393]">•</span>
+                        <span className="mt-1 sm:mt-0 font-sans font-light normal-case text-xs sm:text-[14px] text-[#B1A393]">
                             Pioneering peace activist, community leader
                         </span>
                     </h2>
@@ -276,13 +276,13 @@ function LargeInducteeCard({ item }: { item: Inductee }) {
 
             {/* Top Right context info */}
             <div className="xs:absolute left-0 xs:left-[225px] top-5 right-5 mt-4 xs:mt-0">
-                <span className="xs:ml-auto block w-fit border border-white/10 px-3 py-1.5 text-[9px] font-semibold tracking-[3px] text-[#D9B700]">
+                <span className="xs:ml-auto block w-fit border border-white/10 px-3 py-1.5 text-[9px] font-semibold tracking-[3px] text-[var(--gold)]">
                     {item.years}
                 </span>
 
                 <p className="mt-5 xs:mt-7 text-xs font-light leading-relaxed text-[#DBD2C8] line-clamp-4 xs:line-clamp-none">
                     {item.description}
-                    <span className="ml-1 text-[#D9B700] block mt-1">Click to open »</span>
+                    <span className="ml-1 text-[var(--gold)] block mt-1">Click to open »</span>
                 </p>
             </div>
 

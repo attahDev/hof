@@ -21,7 +21,7 @@ const initialRecords: WitnessRecord[] = [
   {
     id: "witness-1",
     witness: "Okerie Johnson",
-    inductee: "Prof. Erinma Bell",
+    inductee: "Prof Erinma Bell MBE DL JP",
     location: "Manchester, UK",
     date: "July 2026",
   },
@@ -35,7 +35,7 @@ const initialRecords: WitnessRecord[] = [
   {
     id: "witness-3",
     witness: "Kwame Mensah",
-    inductee: "Prof. Erinma Bell",
+    inductee: "Prof Erinma Bell MBE DL JP",
     location: "Accra, Ghana",
     date: "August 2026",
   },
@@ -125,12 +125,12 @@ export default function WitnessArchivePage() {
   };
 
   return (
-    <main className="min-h-screen w-full bg-[#F5EBE1] px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
+    <main className="min-h-screen w-full bg-[var(--paper)] px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
       
       {/* Header Panel */}
       <header className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
         <div>
-          <h1 className="text-[28px] xs:text-[36px] lg:text-[45px] font-bold uppercase leading-none tracking-tight text-[#000D1C]">
+          <h1 className="font-serif text-[30px] xs:text-[38px] lg:text-[48px] font-medium leading-none text-[var(--ink)]">
             Witness Archive
           </h1>
 
@@ -142,7 +142,7 @@ export default function WitnessArchivePage() {
         <button
           type="button"
           onClick={() => setIsModalOpen(true)}
-          className="mt-2 md:mt-3 inline-flex h-[50px] sm:h-[60px] w-full md:w-auto items-center justify-center gap-4 sm:gap-5 rounded-[12px] bg-[#D9B700] px-5 sm:px-6 text-sm sm:text-[18px] font-bold text-[#000D1C] transition hover:bg-[#C8AA00] active:scale-[0.98]"
+          className="mt-2 md:mt-3 inline-flex h-[50px] sm:h-[60px] w-full md:w-auto items-center justify-center gap-4 sm:gap-5 rounded-[12px] bg-[var(--gold)] px-5 sm:px-6 text-sm sm:text-[18px] font-bold text-[var(--ink)] transition hover:bg-[#C8AA00] active:scale-[0.98]"
         >
           Sign as Witness
           <ArrowRight size={21} />
@@ -150,7 +150,7 @@ export default function WitnessArchivePage() {
       </header>
 
       {/* Signatures List Panel */}
-      <section className="mt-8 sm:mt-12 lg:mt-[76px] overflow-hidden rounded-[15px] bg-[#000D1C] px-5 py-6 sm:px-8 sm:py-8 lg:px-10 lg:py-9">
+      <section className="mt-8 sm:mt-12 lg:mt-[76px] overflow-hidden rounded-[15px] bg-[var(--ink)] px-5 py-6 sm:px-8 sm:py-8 lg:px-10 lg:py-9">
         
         {/* Desktop Header Only */}
         <div className="hidden md:grid md:grid-cols-[1.55fr_0.95fr_0.95fr_0.62fr] gap-4 lg:gap-8 text-sm lg:text-[18px] font-bold text-[#B1A393] border-b border-white/10 pb-4">
@@ -215,7 +215,7 @@ export default function WitnessArchivePage() {
             }
           }}
         >
-          <div className="w-full max-w-[560px] rounded-[15px] bg-[#000D1C] p-6 sm:p-8 shadow-2xl border border-white/10 animate-in fade-in-50 zoom-in-95 duration-200">
+          <div className="w-full max-w-[560px] rounded-[15px] bg-[var(--ink)] p-6 sm:p-8 shadow-2xl border border-white/10 animate-in fade-in-50 zoom-in-95 duration-200">
             <div className="flex items-start justify-between">
               <div>
                 <h2 className="text-lg sm:text-xl font-bold uppercase text-white">
@@ -272,7 +272,7 @@ export default function WitnessArchivePage() {
 
                 <button
                   type="submit"
-                  className="inline-flex h-11 items-center justify-center gap-3 rounded-lg bg-[#D9B700] px-5 text-sm font-bold text-[#000D1C] hover:bg-[#C8AA00] transition-colors"
+                  className="inline-flex h-11 items-center justify-center gap-3 rounded-lg bg-[var(--gold)] px-5 text-sm font-bold text-[var(--ink)] hover:bg-[#C8AA00] transition-colors"
                 >
                   Add Signature
                   <ArrowRight size={17} />
@@ -310,8 +310,8 @@ function FormInput({
         className={[
           "h-12 w-full rounded-lg border bg-transparent px-4 text-sm text-white outline-none placeholder:text-[#7F8A99] transition-colors",
           error
-            ? "border-[#D7263D]"
-            : "border-[#5A6675] focus:border-[#D9B700]",
+            ? "border-[var(--crimson)]"
+            : "border-[#5A6675] focus:border-[var(--gold)]",
         ].join(" ")}
       />
 
