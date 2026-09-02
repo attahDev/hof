@@ -44,7 +44,7 @@ export default function ClosingLegacySection() {
             </div>
           </div>
         </div>
-
-
+      </div>
+    </ScrollReveal>
   );
 }
