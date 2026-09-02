@@ -1,44 +1,47 @@
 import Link from "next/link";
 import { Landmark, Handshake, Globe, Trophy, type LucideIcon } from "lucide-react";
-import type { StatsContent, HomeStats } from "../../lib/gmbteApi";
 import FeaturedLeaderCard from "./FeaturedLeaderCard";
 import AnimatedNumber from "../animations/AnimatedNumber";
 
-const STAT_ICONS: Record<string, LucideIcon> = {
-  Inductees: Landmark,
-  "Community Champions": Handshake,
-  Regions: Globe,
-  "Award Winners": Trophy,
+type StatRow = {
+  label: string;
+  value: number;
+  caption: string;
+  icon: LucideIcon;
 };
+
+const STAT_ROWS: StatRow[] = [
+  {
+    label: "Inductees",
+    value: 126,
+    caption: "Hall of Fame legends recognized across six centuries",
+    icon: Landmark,
+  },
+  {
+    label: "Community Champions",
+    value: 1245,
+    caption: "Builders and visionaries in the global BTE network",
+    icon: Handshake,
+  },
+  {
+    label: "Regions",
+    value: 35,
+    caption: "Nations and territories represented in our archive",
+    icon: Globe,
+  },
+  {
+    label: "Award Winners",
+    value: 485,
+    caption: "Recipients of the BTE Global Excellence Citation",
+    icon: Trophy,
+  },
+];
 
 function fmt(n: number) {
   return `${n.toLocaleString()}+`;
 }
 
-export default function StatsSection({ stats, content }: { stats: HomeStats; content?: StatsContent }) {
-  const rows = [
-    {
-      label: content?.inducteesLabel ?? "Inductees",
-      value: fmt(stats.inducteesCount),
-      caption: "Hall of Fame legends recognized across six centuries",
-    },
-    {
-      label: content?.communityLabel ?? "Community Champions",
-      value: fmt(stats.communityChampionsCount),
-      caption: "Builders and visionaries in the global BTE network",
-    },
-    {
-      label: content?.regionsLabel ?? "Regions",
-      value: fmt(stats.regionsCount),
-      caption: "Nations and territories represented in our archive",
-    },
-    {
-      label: content?.awardsLabel ?? "Award Winners",
-      value: fmt(stats.awardWinnersCount),
-      caption: "Recipients of the BTE Global Excellence Citation",
-    },
-  ];
-
+export default function StatsSection() {
   return (
     <section className="bg-[var(--midnight)] px-6 py-16">
       <div className="mx-auto grid max-w-[1300px] grid-cols-1 items-center gap-10 lg:grid-cols-[1fr_1fr_1fr] lg:gap-16">
@@ -52,13 +55,13 @@ export default function StatsSection({ stats, content }: { stats: HomeStats; con
           </h2>
           <div className="mt-8 flex flex-wrap gap-4">
             <Link
-              href="/hall-of-fame"
+              href="/#legacy"
               className="rounded-[8px] bg-[var(--gold)] px-6 py-3 text-xs font-bold tracking-wide text-[var(--ink)]"
             >
               Explore the Legacy →
             </Link>
             <Link
-              href="/hall-of-fame/nominate"
+              href="/dashboard/nominations"
               className="rounded-[8px] border border-white/30 px-6 py-3 text-xs font-bold tracking-wide text-white"
             >
               Nominate a Changemaker
@@ -67,13 +70,13 @@ export default function StatsSection({ stats, content }: { stats: HomeStats; con
         </div>
 
         <div className="grid grid-cols-2 gap-6">
-          {rows.map((stat) => {
-            const Icon = STAT_ICONS[stat.label] ?? Trophy;
+          {STAT_ROWS.map((stat) => {
+            const Icon = stat.icon;
             return (
               <div key={stat.label}>
                 <Icon size={22} strokeWidth={1.75} className="text-[var(--gold)]" />
                 <p className="mt-3 font-serif text-3xl text-white">
-                  <AnimatedNumber value={stat.value} />
+                  <AnimatedNumber value={fmt(stat.value)} />
                 </p>
                 <p className="mt-1 text-xs font-semibold tracking-wide text-white/70 uppercase">{stat.label}</p>
                 <p className="mt-1 text-xs leading-relaxed text-white/40">{stat.caption}</p>
