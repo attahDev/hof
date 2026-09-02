@@ -3,6 +3,7 @@ import HallOfFameHero from "./components/HallOfFameHero";
 import ChapterCard from "./components/ChapterCard";
 import LegacyIntroSection from "./components/LegacyIntroSection";
 import LegacyImpactSection from "./components/LegacyImpactSection";
+import LeadershipSection from "./components/LeadershipSection";
 import LegacyTimelineSection from "./components/LegacyTimelineSection";
 import IntellectualTraditionsSection from "./components/IntellectualTraditionsSection";
 import FoundationsSection from "./components/FoundationsSection";
@@ -28,6 +29,7 @@ export default function Home() {
       <div id="prologue">
         <LegacyIntroSection />
         <LegacyImpactSection />
+        <LeadershipSection />
       </div>
 
       <ChapterCard
