@@ -13,13 +13,13 @@ type StatRow = {
 const STAT_ROWS: StatRow[] = [
   {
     label: "Inductees",
-    value: 126,
+    value: 12,
     caption: "Hall of Fame legends recognized across six centuries",
     icon: Landmark,
   },
   {
     label: "Community Champions",
-    value: 1245,
+    value: 124,
     caption: "Builders and visionaries in the global BTE network",
     icon: Handshake,
   },
