@@ -19,6 +19,7 @@ export default function Home() {
     <StoryExperience>
       <HallOfFameHero />
 
+      
       <ChapterCard
         numeral="—"
         title="Prologue"
